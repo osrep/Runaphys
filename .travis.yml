@@ -1,0 +1,33 @@
+language: cpp
+os: linux
+dist: xenial
+compiler: gcc
+
+addons:
+    sonarcloud:
+        organization: "micskeiz"
+        token:
+            secure: "QW+Hh1DCGAudvqdQQr+4iyk28/8k3fUoCKunjdiKmGX4tdNI6ipBBQd9ITBk+wC5F+e287TQ8jj7NChrky67sJW4GF0dT1UvNgeDXFYS4XQsZcjKaNDMqwoPsOrUhTTpSf65mSrgSgvCBaCI8jY2DlCYQES8zj7rIUDLfddS83J+tkPzTf27JjKXI6lPCnbOMtVT4jsALMwe3qZAGUZUM1LLRIXbK5jjwGnXI4cbYHlQKtVsgYfeaQIurJD/hG3QYpIdi9/m33PqQGnmHKNd5KXBPrPMmF7a+gHPtKywyrXLwYE2c7LXWgm4e1M6LNzekJssH82Y+SXjqbY5iK5YrRzzryZVbeUfjo643mbzKiyzzSd9apu/qAl66eAnAHcdRljQa5Y6fWRIkTlqXRLtZBUhKmPAUK66Jg/PtTlHjKGh1+qV/CE5+jweAhbLjVL5HM8+9DhYrhC89VawE2V394PJk56YRRFE+/O8ngMdjv4ngIo3WSjmkvbl0jNG7jthHk6WYHtFvKiY2dfGVeev+QmqwMBzxwHKqM2LVqFds4SCbswMEDh1dS8voqZm9y1BXw+4dgH25HjM/R/8fHM3RZKhosWrQKH9+Y1h3QfChwrohHODBLWkLt8qUOg4HEts7bT4dAhBKTlzGY7hbGfvqdFz0y2nZC7e4oPOwi6Uh2Q="
+
+branches:
+    only:
+        - temp_travis
+script:
+    # Prepare the build system
+    - mkdir build && cd build
+    - cmake ..
+    # Go back to the project root folder in order for Sonar to find its config file
+    - cd ..
+    # Wrap the compilation with the Sonar Build Wrapper
+    - build-wrapper-linux-x86-64 --out-dir bw-output cmake --build build/
+    # Run tests 
+    # TODO use cmake --build build --target test ??
+    - ./build/test/RuninTests
+    # Run Sonar analysis
+    - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+
+cache:
+
+  directories:
+
+    - '$HOME/.sonar/cache'
