@@ -11,7 +11,7 @@ addons:
 
 branches:
     only:
-        - temp_travis
+        - init_repo
 script:
     # Prepare the build system
     - mkdir build && cd build
