@@ -1,7 +1,7 @@
 #ifndef GROWTH_RATE_H_
 #define GROWTH_RATE_H_
 
-#include "cell.h"
+
 
 
 double calculate_growth_rate(double electron_density, double electron_temperature,

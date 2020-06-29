@@ -1,7 +1,7 @@
 #ifndef CRITICAL_FIELD_H_
 #define CRITICAL_FIELD_H_
 
-#include "cell.h"
+
 
 
 double calculate_coulomb_log(double electron_density, double electron_temperature);

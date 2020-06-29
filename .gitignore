@@ -33,3 +33,6 @@
 
 #ignore files with tilde ending
 *~
+
+#ignore build folder
+build/
