@@ -26,7 +26,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 
 # Set Runin test sources
 SET(TEST_SOURCES
-    test_phys.cpp
+    tests.cpp
 )
 
 add_executable(RuninTests ${TEST_SOURCES})
