@@ -5,15 +5,6 @@
 #include "growth_rate.h"
 #include "critical_field.h"
 
-/*
-Growth rate warning
-
-The module outputs an integer value (0 or 1) which indicates, whether the growth rate of runaway electron
-generation is above the limit value given in Demultiplexer workflow, thus runaway generation is to be expected.
-If the growth rate exceeds the limit value this warning raises.
-
-*/
-
 
 
 // Calculation of growth rate

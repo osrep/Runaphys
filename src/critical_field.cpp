@@ -4,13 +4,6 @@
 #include "critical_field.h"
 #include "products.h"
 
-/* Critical field warning
-
-The module outputs an integer value (0 or 1) which indicates, whether electric field is above the critical level, thus runaway generation is possible. When the electric field exceeds the critical level this warning raises, a value of 1 is outputted. However it does not mean that runaway electrons are present, the warning only signs the possibility.
-
-*/
-
-
 
 double calculate_critical_field(double electron_density, double electron_temperature) {
 
