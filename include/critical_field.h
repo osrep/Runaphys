@@ -1,8 +1,9 @@
 #ifndef CRITICAL_FIELD_H_
 #define CRITICAL_FIELD_H_
 
+#include "cell.h"
 
-
+int is_field_critical(profile pro, double rho_max);
 
 double calculate_coulomb_log(double electron_density, double electron_temperature);
 
