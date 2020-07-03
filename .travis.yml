@@ -9,9 +9,7 @@ addons:
         token:
             secure: "ULDkx0aYbYZ8szHiLW4Y4fmZLxGvS8WQ5K0UZEZVXKOCg3VhQkpYmG0pc6Otxo9DYWNeBVC1oWX/nHfCn/tMYf5eOARsD4q6FhkNP7JcQODKaNSh60a+3ygdf2wKdfCxrx8Yotxgu+7scnqULqU3Rf/Xa8dkzu9fSC4QZtNTPRZZzmwGrYZdyJrP1H3O8Q+Ork9nqhlMLjTE2HCod6GOKysHk/aQ7Iga9fqZ7tMHR/BeKGKkFMEQaTZtE2zlXriWyOcmyOdGwwa42opSU4uMYRbEhWlJzm9C2jK27RRtSCKEFaByKNnm8Pkc3GtBeyO+Cv4n7CZeifm7k3+aYb+EHmCO0xUfazZlttfPbrr1HwrHkcftZKJ8+MM3M6zyKgcnyYx7r+K9hi7YYGbN0bz2/ci0a7tUiSU4wR6OT6maxnt5zcV1H0Kx8/wAdVpkI0CVsmgspeI8gDRhxPhU3VaPXYA2p7yK7kTwFLHYqfcAZc7h2fJgubvlNeA4clI7d7WvTsWyz2HcIWRYZgsYuCNtpQvdxz1fXe2tCtKN+LTFgEhJXhSPvsmEv/7KwhOlOSsm3c690PG9hAWmnKC385E/2waQBqeVRBrbQFL/VZMXbPnojdgrSp+j1FLHB1mV7YMPkoTk4WbgRn58ZmGUd9y5LpiRrC1TU+IUa4QAk2SUvGE="
 
-branches:
-    only:
-        - init_repo
+
 script:
     # Prepare the build system
     - mkdir build && cd build
