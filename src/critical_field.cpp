@@ -3,7 +3,18 @@
 #include "constants.h"
 #include "critical_field.h"
 #include "products.h"
+#include "cell.h"
 
+int is_field_critical(profile pro, double rho_max) {
+
+	for (std::vector<cell>::iterator it = pro.begin(); it != pro.end(); ++it) {
+		if ( (abs(it->electric_field)) > (calculate_critical_field(it->electron_density, it->electron_temperature) )
+		  && (it->rho < rho_max) )
+			return 1;
+	}
+
+	return 0;
+}
 
 double calculate_critical_field(double electron_density, double electron_temperature) {
 
