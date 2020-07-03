@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <cmath>
 #include <vector>
-#include "constants.h"
-#include "growth_rate.h"
-#include "critical_field.h"
-#include "cell.h"
+#include "../include/constants.h"
+#include "../include/growth_rate.h"
+#include "../include/critical_field.h"
+#include "../include/cell.h"
 
 int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 
