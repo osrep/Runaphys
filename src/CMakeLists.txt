@@ -3,4 +3,4 @@ set(SOURCE_FILES
     growth_rate.cpp
 )
 
-add_library(Runin ${SOURCE_FILES})
+add_library(Runaphys ${SOURCE_FILES})
