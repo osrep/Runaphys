@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+#ignore files with tilde ending
+*~
+
+#ignore build folder
+build/
