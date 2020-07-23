@@ -1,9 +1,9 @@
 #include <cmath>
 #include <stdlib.h>
-#include "../include/constants.h"
-#include "../include/critical_field.h"
-#include "../include/products.h"
-#include "../include/cell.h"
+#include "constants.h"
+#include "critical_field.h"
+#include "products.h"
+#include "cell.h"
 
 int is_field_critical(profile pro, double rho_max) {
 
