@@ -24,7 +24,7 @@ script:
     #gcov
     - ls
     #- pip install gcovr
-    - gcov -w
+    - gcov test/tests.cpp
     - echo $TRAVIS_BUILD_DIR
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
