@@ -22,15 +22,12 @@ script:
     # TODO use cmake --build build --target test ??
     - ./build/test/RuninTests
     #gcov
-    - cd build/src/CMakeFiles/Runin.dir
-    - ls
-    - mv build/src/CMakeFiles/Runin.dir/critical_field.cpp.gcno src
-    - mv build/src/CMakeFiles/Runin.dir/growth_rate.cpp.gcno src
-    - cd $TRAVIS_BUILD_DIR
-    - cd build/test/CMakeFiles/RuninTests.dir
-    - ls
     #- pip install gcovr
-    - gcov build/test/CMakeFiles/RuninTests.dir/tests.cpp.gcno
+    - mv $TRAVIS_BUILD_DIR/build/test/CMakeFiles/RuninTests.dir/test.cpp.gcno $TRAVIS_BUILD_DIR/test
+    - mv $TRAVIS_BUILD_DIR/build/src/CMakeFiles/Runin.dir/critical_field.cpp.gcno $TRAVIS_BUILD_DIR/src
+    - mv $TRAVIS_BUILD_DIR/build/src/CMakeFiles/Runin.dir/growth_rate.cpp.gcno $TRAVIS_BUILD_DIR/src
+    - ls $TRAVIS_BUILD_DIR/src
+    - gcov test/test.cpp
     - ls
     - echo $TRAVIS_BUILD_DIR
     # Run Sonar analysis
