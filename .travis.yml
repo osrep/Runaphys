@@ -25,6 +25,7 @@ script:
     - ls
     - pip install gcovr
     - gcovr --sonarqube -r .
+    - echo $TRAVIS_BUILD_DIR
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
 
