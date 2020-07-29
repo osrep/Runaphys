@@ -23,8 +23,8 @@ script:
     - ./build/test/RuninTests
     #gcov
     - ls
-    - pip install gcovr
-    - gcovr --sonarqube -r test
+    #- pip install gcovr
+    - gcov -w
     - echo $TRAVIS_BUILD_DIR
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
