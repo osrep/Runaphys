@@ -22,7 +22,8 @@ script:
     # TODO use cmake --build build --target test ??
     - ./build/test/RuninTests
     #gcov
-    - ls
+    - cd build
+    - ls build
     #- pip install gcovr
     - gcov test/tests.cpp
     - echo $TRAVIS_BUILD_DIR
