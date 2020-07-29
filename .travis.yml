@@ -24,7 +24,7 @@ script:
     #gcov
     - ls
     - pip install gcovr
-    - gcovr --sonarqube -r 
+    - gcovr --sonarqube -r .
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
 
