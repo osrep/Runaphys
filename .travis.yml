@@ -22,7 +22,7 @@ script:
     # TODO use cmake --build build --target test ??
     - ./build/test/RuninTests
     #gcov
-    - ./gcov.sh 
+    - gcov.sh
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
 
