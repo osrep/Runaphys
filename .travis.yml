@@ -26,6 +26,7 @@ script:
     - ls
     - mv build/src/CMakeFiles/Runin.dir/critical_field.cpp.gcno src
     - mv build/src/CMakeFiles/Runin.dir/growth_rate.cpp.gcno src
+    - cd $TRAVIS_BUILD_DIR
     - cd build/test/CMakeFiles/RuninTests.dir
     - ls
     #- pip install gcovr
