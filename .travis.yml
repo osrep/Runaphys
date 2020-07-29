@@ -23,7 +23,7 @@ script:
     - ./build/test/RuninTests
     #gcov
     - cd build
-    - ls build
+    - ls
     #- pip install gcovr
     - gcov test/tests.cpp
     - echo $TRAVIS_BUILD_DIR
