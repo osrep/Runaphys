@@ -25,7 +25,7 @@ script:
     #gcov
     - $TRAVIS_BUILD_DIR/gcov.sh
     # Run Sonar analysis
-    - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output -X
+    - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output 
 
 cache:
 
