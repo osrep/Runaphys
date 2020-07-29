@@ -27,8 +27,8 @@ script:
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output 
 
-cache:
+#cache:
 
-  directories:
+# directories:
 
-    - '$HOME/.sonar/cache'
+#   - '$HOME/.sonar/cache'
