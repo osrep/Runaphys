@@ -5,7 +5,7 @@
 #include "products.h"
 #include "cell.h"
 
-int a = 2;
+int c = 2;
 
 int is_field_critical(profile pro, double rho_max) {
 
