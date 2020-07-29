@@ -29,7 +29,7 @@ SET(TEST_SOURCES
     tests.cpp
 )
 
-add_executable(RuninTests ${TEST_SOURCES})
+add_executable(RunaphysTests ${TEST_SOURCES})
 
-target_link_libraries(RuninTests Runin gtest_main pthread)
-add_test(NAME test_phys COMMAND RuninTests)
+target_link_libraries(RunaphysTests Runaphys gtest_main pthread)
+add_test(NAME test_phys COMMAND RunaphysTests)

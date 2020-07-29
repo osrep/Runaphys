@@ -20,7 +20,8 @@ script:
     - build-wrapper-linux-x86-64 --out-dir bw-output cmake --build build/
     # Run tests 
     # TODO use cmake --build build --target test ??
-    - ./build/test/RuninTests
+    - ./build/test/RunaphysTests
+
     #gcov
     - $TRAVIS_BUILD_DIR/gcov.sh
     # Run Sonar analysis
