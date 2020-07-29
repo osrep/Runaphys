@@ -7,6 +7,7 @@
 #include "cell.h"
 
 int a = 3;
+int b = 3;
 
 int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 
