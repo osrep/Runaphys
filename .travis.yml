@@ -32,7 +32,8 @@ script:
     - mv $TRAVIS_BUILD_DIR/build/src/CMakeFiles/Runin.dir/growth_rate.cpp.gcda $TRAVIS_BUILD_DIR/src
     - mv $TRAVIS_BUILD_DIR/build/src/CMakeFiles/Runin.dir/growth_rate.cpp.gcno $TRAVIS_BUILD_DIR/src
     - ls $TRAVIS_BUILD_DIR/src
-    - gcov src/critical_field.cpp.cpp src/growth_rate.cpp.cpp
+    - gcov src/critical_field.cpp.cpp 
+    - gcov src/growth_rate.cpp.cpp
     - ls
     - echo $TRAVIS_BUILD_DIR
     # Run Sonar analysis
