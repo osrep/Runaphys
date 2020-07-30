@@ -20,7 +20,6 @@ int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 	return 0;
 }
 
-// Calculation of growth rate
 double calculate_growth_rate(double electron_density, double electron_temperature,
 							 double effective_charge, double electric_field) {
 	
