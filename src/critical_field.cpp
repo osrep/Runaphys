@@ -5,8 +5,6 @@
 #include "products.h"
 #include "cell.h"
 
-
-
 int is_field_critical(profile pro, double rho_max) {
 
 	for (std::vector<cell>::iterator it = pro.begin(); it != pro.end(); ++it) {

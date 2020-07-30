@@ -6,7 +6,6 @@
 #include "critical_field.h"
 #include "cell.h"
 
-
 int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 
 	for (std::vector<cell>::iterator it = pro.begin(); it != pro.end(); ++it) {
