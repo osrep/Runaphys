@@ -6,9 +6,11 @@
 #include "critical_field.h"
 #include "cell.h"
 
-//Checks if growth is over a specified limit, given by the limit parameter
-//It requires the physical parameters of the plasma, which is given in the profile
-//Above a certain rho given by rho_max, the flag is not given back
+/**
+ * Checks if growth is over a specified limit, given by the limit parameter
+ * It requires the physical parameters of the plasma, which is given in the profile
+ * Above a certain rho given by rho_max, the flag is not given back
+ */
 int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 
 	for (std::vector<cell>::iterator it = pro.begin(); it != pro.end(); ++it) {

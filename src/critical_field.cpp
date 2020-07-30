@@ -5,9 +5,11 @@
 #include "products.h"
 #include "cell.h"
 
-//Checks if a electric field is larger then the critical field 
-//It requires the physical parameters of the plasma, which is given in the profile
-//Above a certain rho given by rho_max, the flag is not given back
+/** 
+ * Checks if a electric field is larger then the critical field 
+ * It requires the physical parameters of the plasma, which is given in the profile
+ * Above a certain rho given by rho_max, the flag is not given back
+ */
 int is_field_critical(profile pro, double rho_max) {
 
 	for (std::vector<cell>::iterator it = pro.begin(); it != pro.end(); ++it) {
