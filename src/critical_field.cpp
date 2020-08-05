@@ -8,7 +8,7 @@
 /** 
  * Checks if a electric field is larger then the critical field 
  * It requires the physical parameters of the plasma, which is given in the profile
- * Above a certain rho given by rho_max, the flag is not given back
+ * Above a certain rho given by rho_max, a false flag is returned
  * regardless of the outcome of the check.
  * Otherwise if it is larger it returns true (1) and false (0) if not
  */
