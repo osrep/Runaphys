@@ -41,8 +41,6 @@ module_struct modules67 {str_dreicer_formula67, false, str_avalanche_formula, fa
 const double reference_dreicer_generation_rate_63 =4.1378e-2;
 const double reference_dreicer_generation_rate_66 = 9.1233;
 const double reference_dreicer_generation_rate_67 = 7.1931e1;
-const double reference_electric_field_1 =  reference_alpha_1*reference_critical_field;
-const double reference_electric_field_2 =  reference_alpha_2*reference_critical_field;
 const double reference_lambda = 2.0169;
 const double reference_Coulomb_logarithm = 18.3539;
 const double reference_gamma =3.086476806;

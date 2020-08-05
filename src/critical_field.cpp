@@ -1,6 +1,5 @@
 #include <cmath>
 #include <stdlib.h>
-#include "constants.h"
 #include "critical_field.h"
 #include "products.h"
 #include "cell.h"

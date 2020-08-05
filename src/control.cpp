@@ -6,7 +6,7 @@
 #include "avalanche.h"
 #ifdef ITM_CONSTANTS
     #include "cpo_utils.h"
-#else
+#elif IMAS_CONSTANTS
     #include "ids_utils.h"
 #endif
 #include "products.h"
