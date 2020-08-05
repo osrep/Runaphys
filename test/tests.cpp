@@ -25,6 +25,8 @@ const double reference_critical_field = 0.935882;
 const double reference_runaway_electron_collision_time = 1.82129e-3;
 const double reference_alpha_1 = 1.2;
 const double reference_alpha_2 = 0.8;
+const double reference_electric_field_1_runafluid =  reference_alpha_1*reference_critical_field;
+const double reference_electric_field_2_runafluid =  reference_alpha_2*reference_critical_field;
 
 std::string str_dreicer_formula63 = "hc_formula_63";
 std::string str_dreicer_formula66 = "hc_formula_66";
@@ -140,17 +142,17 @@ TEST(CriticalField, CalculateSynchrotronLossTime) {
 
 TEST(Dreicer, DreicerGenerationRate_63) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_63, dreicer_generation_rate(reference_ne, reference_te,reference_Zeff_1,
-																		  reference_electric_field_1,reference_rho_tor_norm,modules63), reference_dreicer_generation_rate_63*1e-4);
+																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules63), reference_dreicer_generation_rate_63*1e-4);
 }
 
 TEST(Dreicer, DreicerGenerationRate_66) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_66, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1,reference_rho_tor_norm,modules66), reference_dreicer_generation_rate_66*1e-4);
+																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules66), reference_dreicer_generation_rate_66*1e-4);
 }
 
 TEST(Dreicer, DreicerGenerationRate_67) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_67, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1,reference_rho_tor_norm,modules67), reference_dreicer_generation_rate_67*1e-4);
+																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules67), reference_dreicer_generation_rate_67*1e-4);
 }
 
 TEST(Dreicer, CalculateLambda) {
@@ -177,13 +179,13 @@ TEST(Avalanche, CalculateAvalancheThresholdField){								//new test with good i
 TEST(Avalanche, CalculateAvalancheGenerationRate) {
 
 	EXPECT_NEAR(avalanche_generation_rate_mod_1, avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		 reference_electric_field_2,reference_magnetic_field,
+																		 reference_electric_field_2_runafluid,reference_magnetic_field,
 																		 modules_no_threshold), avalanche_generation_rate_mod_1*1e-6);
 	EXPECT_NEAR(avalanche_generation_rate_mod_2, avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		 reference_electric_field_2,reference_magnetic_field,
+																		 reference_electric_field_2_runafluid,reference_magnetic_field,
 																		 modules_no_threshold), avalanche_generation_rate_mod_2*1e-6);
 	EXPECT_NEAR(avalanche_generation_rate_mod_3, avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		 reference_electric_field_1,reference_magnetic_field,
+																		 reference_electric_field_1_runafluid,reference_magnetic_field,
 																		 modules_threshold), avalanche_generation_rate_mod_3*1e-5);
 
 }
