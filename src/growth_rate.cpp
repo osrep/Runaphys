@@ -6,6 +6,13 @@
 #include "critical_field.h"
 #include "cell.h"
 
+/**
+ * Checks if growth is over a specified limit, given by the limit parameter
+ * It requires the physical parameters of the plasma, which is given in the profile
+ * Above a certain rho given by rho_max, a false flag is returned
+ * regardless of the outcome of the check.
+ * Otherwise if it is over the limit it returns true (1) and false (0) if not
+ */
 int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 
 	for (std::vector<cell>::iterator it = pro.begin(); it != pro.end(); ++it) {
@@ -17,7 +24,6 @@ int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 	return 0;
 }
 
-// Calculation of growth rate
 double calculate_growth_rate(double electron_density, double electron_temperature,
 							 double effective_charge, double electric_field) {
 	
