@@ -23,7 +23,7 @@ script:
     - ./build/test/RunaphysTests
 
     #gcov
-    - $TRAVIS_BUILD_DIR/gcov.sh
+    - ./gcov.sh
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output 
 
