@@ -21,11 +21,14 @@ script:
     # Run tests 
     # TODO use cmake --build build --target test ??
     - ./build/test/RunaphysTests
+
+    #gcov
+    - ./gcov.sh
     # Run Sonar analysis
-    - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+    - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output 
 
 cache:
 
-  directories:
+ directories:
 
-    - '$HOME/.sonar/cache'
+   - '$HOME/.sonar/cache'
