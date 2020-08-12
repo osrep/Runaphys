@@ -9,7 +9,7 @@
 
 using namespace std;
 
-double avalanche_generation_rate(double electron_density, double electron_temperature, double effective_charge, double electric_field, double magnetic_field, module_struct modules) {
+double avalanche_generation_rate(double electron_density, double electron_temperature, double effective_charge, double electric_field, double magnetic_field, module_struct const &modules) {
 
 	double avalanche_generation_rate = 0;
 	double avalanche_threshold_field;

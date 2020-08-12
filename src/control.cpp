@@ -19,7 +19,7 @@ timestep: in s
 */
 
 double runafluid_control(double electron_density, double rundensity_before, double electron_temperature,
-		double effective_charge, double electric_field, double magnetic_field, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct modules, double *rate_values){
+		double effective_charge, double electric_field, double magnetic_field, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
 	
 	double rundensity_after = 0.0;
 	double rate_dreicer = 0.0;
