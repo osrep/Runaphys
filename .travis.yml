@@ -9,20 +9,7 @@ addons:
         token:
             secure: "ULDkx0aYbYZ8szHiLW4Y4fmZLxGvS8WQ5K0UZEZVXKOCg3VhQkpYmG0pc6Otxo9DYWNeBVC1oWX/nHfCn/tMYf5eOARsD4q6FhkNP7JcQODKaNSh60a+3ygdf2wKdfCxrx8Yotxgu+7scnqULqU3Rf/Xa8dkzu9fSC4QZtNTPRZZzmwGrYZdyJrP1H3O8Q+Ork9nqhlMLjTE2HCod6GOKysHk/aQ7Iga9fqZ7tMHR/BeKGKkFMEQaTZtE2zlXriWyOcmyOdGwwa42opSU4uMYRbEhWlJzm9C2jK27RRtSCKEFaByKNnm8Pkc3GtBeyO+Cv4n7CZeifm7k3+aYb+EHmCO0xUfazZlttfPbrr1HwrHkcftZKJ8+MM3M6zyKgcnyYx7r+K9hi7YYGbN0bz2/ci0a7tUiSU4wR6OT6maxnt5zcV1H0Kx8/wAdVpkI0CVsmgspeI8gDRhxPhU3VaPXYA2p7yK7kTwFLHYqfcAZc7h2fJgubvlNeA4clI7d7WvTsWyz2HcIWRYZgsYuCNtpQvdxz1fXe2tCtKN+LTFgEhJXhSPvsmEv/7KwhOlOSsm3c690PG9hAWmnKC385E/2waQBqeVRBrbQFL/VZMXbPnojdgrSp+j1FLHB1mV7YMPkoTk4WbgRn58ZmGUd9y5LpiRrC1TU+IUa4QAk2SUvGE="
 
-install:
-    # Downloading hdf5 includes
-    - mkdir hdf5 && cd hdf5
-    - wget http://h5cpp.org/download/libh5cpp-dev_1.10.4.6-1~exp1_all.deb
-    - wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-dev_1.10.0-patch1+docs-3+deb9u1_amd64.deb
-    - wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-mpi-dev_1.10.6+repack-2_amd64.deb
-    - wget http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
-    - wget http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
-    - sudo dpkg -i libhdf5-dev_1.10.0-patch1+docs-3+deb9u1_amd64.deb
-    - sudo dpkg -i libhdf5-mpi-dev_1.10.6+repack-2_amd64.deb
-    - sudo dpkg -i openmpi-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
-    - sudo dpkg -i libhdf5-mpich-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
-    - sudo dpkg -i libh5cpp-dev_1.10.4.6-1~exp1_all.deb 
-    - cd ..
+
 script:
     # Prepare the build system
     - mkdir build && cd build
