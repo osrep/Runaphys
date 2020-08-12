@@ -13,6 +13,14 @@ install:
     # Downloading hdf5 includes
     - mkdir hdf5 && cd hdf5
     - wget http://h5cpp.org/download/libh5cpp-dev_1.10.4.6-1~exp1_all.deb
+    - wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-dev_1.10.0-patch1+docs-3+deb9u1_amd64.deb
+    - wget http://ftp.de.debian.org/debian/pool/main/h/hdf5/libhdf5-mpi-dev_1.10.6+repack-2_amd64.deb
+    - wget http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
+    - wget http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
+    - sudo dpkg -i libhdf5-dev_1.10.0-patch1+docs-3+deb9u1_amd64.deb
+    - sudo dpkg -i libhdf5-mpi-dev_1.10.6+repack-2_amd64.deb
+    - sudo dpkg -i openmpi-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
+    - sudo dpkg -i libhdf5-mpich-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
     - sudo dpkg -i libh5cpp-dev_1.10.4.6-1~exp1_all.deb 
     - cd ..
 script:
