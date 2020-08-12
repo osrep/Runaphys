@@ -12,11 +12,9 @@ addons:
 install:
     # Downloading hdf5 includes
     - get http://h5cpp.org/download/h5cpp-compiler_1.10.4.6-1~exp1_amd64.deb
-    dpkg:
-        - sudo apt install libllvm6.0 libclang-common-6.0-dev
-        - sudo dpkg -i h5cpp-compiler_1.10.4.6-1~exp1_amd64.deb
-    gdebi:
-        - sudo gdebi h5cpp-compiler_1.10.4.6-1~exp1_amd64.deb
+    - sudo apt install libllvm6.0 libclang-common-6.0-dev
+    - sudo dpkg -i h5cpp-compiler_1.10.4.6-1~exp1_amd64.deb
+    - sudo gdebi h5cpp-compiler_1.10.4.6-1~exp1_amd64.deb
 script:
     # Prepare the build system
     - mkdir build && cd build
