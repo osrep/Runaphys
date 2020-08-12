@@ -11,10 +11,10 @@ addons:
 
 install:
     # Downloading hdf5 includes
-    - wget http://h5cpp.org/download/hdf5-1.10.6.tar.gz
-    - tar -xvzf hdf5-1.10.6.tar.gz && cd hdf5-1.10.6/
-    - ./configure --prefix=/usr/local --enable-build-mode=production
-    - make -j4 && sudo make install
+    - mkdir hdf5 && cd hdf5
+    - wget http://h5cpp.org/download/libh5cpp-dev_1.10.4.6-1~exp1_all.deb
+    - sudo dpkg -i libh5cpp-dev_1.10.4.6-1~exp1_all.deb 
+    - cd ..
 script:
     # Prepare the build system
     - mkdir build && cd build
