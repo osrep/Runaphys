@@ -18,7 +18,7 @@ timestep: in s
 
 */
 
-double runafluid_control(double electron_density, double rundensity_before, double electron_temperature,
+double advance_runaway_population(double electron_density, double rundensity_before, double electron_temperature,
 		double effective_charge, double electric_field, double magnetic_field, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
 	
 	double rundensity_after = 0.0;
@@ -67,7 +67,7 @@ double runafluid_control(double electron_density, double rundensity_before, doub
 }
 
 // Runafluid switch message
-int runafluid_switch_message(module_struct modules){
+int list_parameter_settings(module_struct const &modules){
 	
 	// Dreicer message
 	if (modules.dreicer_formula.empty()){
