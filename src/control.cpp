@@ -30,7 +30,7 @@ double runafluid_control(double electron_density, double rundensity_before, doub
 		if (modules.dreicer_formula.empty()){
 			rate_dreicer = 0;
 		}else{
-			rate_dreicer = dreicer_generation_rate(electron_density, electron_temperature, effective_charge, electric_field, rho_tor_norm, modules);
+			rate_dreicer = dreicer_generation_rate(electron_density, electron_temperature, effective_charge, electric_field, modules);
 		}
 		
 		if (modules.avalanche_formula.empty()){

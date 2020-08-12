@@ -142,17 +142,17 @@ TEST(CriticalField, CalculateSynchrotronLossTime) {
 
 TEST(Dreicer, DreicerGenerationRate_63) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_63, dreicer_generation_rate(reference_ne, reference_te,reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules63), reference_dreicer_generation_rate_63*1e-4);
+																		  reference_electric_field_1_runafluid,modules63), reference_dreicer_generation_rate_63*1e-4);
 }
 
 TEST(Dreicer, DreicerGenerationRate_66) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_66, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules66), reference_dreicer_generation_rate_66*1e-4);
+																		  reference_electric_field_1_runafluid,modules66), reference_dreicer_generation_rate_66*1e-4);
 }
 
 TEST(Dreicer, DreicerGenerationRate_67) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_67, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules67), reference_dreicer_generation_rate_67*1e-4);
+																		  reference_electric_field_1_runafluid,modules67), reference_dreicer_generation_rate_67*1e-4);
 }
 
 TEST(Dreicer, CalculateLambda) {

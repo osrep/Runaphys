@@ -11,7 +11,8 @@ using namespace std;
 
 double avalanche_generation_rate(double electron_density, double electron_temperature, double effective_charge, double electric_field, double magnetic_field, module_struct modules) {
 
-	double agr, avalanche_threshold_field;
+	double avalanche_generation_rate = 0;
+	double avalanche_threshold_field;
 
 	double coulomb_log = calculate_coulomb_log(electron_density, electron_temperature);
 	double critical_field = calculate_critical_field(electron_density, electron_temperature);
@@ -19,20 +20,20 @@ double avalanche_generation_rate(double electron_density, double electron_temper
 	
 	if ( (modules.avalanche_formula == "rosenbluth_putvinski") || (modules.avalanche_formula == "rosenbluth_putvinski_with_threshold") ){
 
-		agr = (electric_field/critical_field - 1) / (2*runaway_collision_time*coulomb_log);
+		avalanche_generation_rate = (electric_field/critical_field - 1) / (2*runaway_collision_time*coulomb_log);
 
 		// threshold field: avalanche_thresold_field
 		if (modules.avalanche_formula == "rosenbluth_putvinski_with_threshold")
 			avalanche_threshold_field = calculate_avalanche_threshold_field(electron_density, electron_temperature,	effective_charge, critical_field, magnetic_field);
 		else avalanche_threshold_field = 0;
 
-		if (electric_field < avalanche_threshold_field) agr = 0;
+		if (electric_field < avalanche_threshold_field) avalanche_generation_rate = 0;
 
 		// Avalanche rate must be non-negative
-		if(isnan(agr) || (agr<0)) agr = 0;
+		if(isnan(avalanche_generation_rate) || (avalanche_generation_rate<0)) avalanche_generation_rate = 0;
 	}
 	
-	return agr;
+	return avalanche_generation_rate;
 	
 }
 
