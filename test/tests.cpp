@@ -69,9 +69,9 @@ const double reference_runaway_electron_density_after66 = 1.66e19;
 const double reference_runaway_electron_density_after67 = 1.31e20;
 double rate_values[4] = {0,0,0,0};
 
-//std::string module_off_setting;
-module_struct modules_off; //= {module_off_setting, false, module_off_setting, false, false, module_off_setting}
+cell CELL = {reference_rho_tor_norm, reference_ne, reference_te, reference_Zeff_1,reference_electric_field_1_runafluid, reference_magnetic_field, reference_runaway_electron_density_before};
 
+module_struct modules_off; 
 TEST(CoulombLog, CalculateCoulombLog) {
 	EXPECT_NEAR(reference_Coulomb_log, calculate_coulomb_log(reference_ne, reference_te), 0.0001);
 }
@@ -201,13 +201,13 @@ TEST(Avalanche, CalculateAvalancheGenerationRate) {
 }
 
 TEST(Control, AdvanceRunawayPopulation_63)  {
-	EXPECT_NEAR(reference_runaway_electron_density_after63, advance_runaway_population(reference_ne, reference_runaway_electron_density_before,reference_te,reference_Zeff_1, reference_electric_field_1_runafluid, reference_magnetic_field, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules63, rate_values), reference_runaway_electron_density_after63*1e-3);
+	EXPECT_NEAR(reference_runaway_electron_density_after63, advance_runaway_population(CELL, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules63, rate_values), reference_runaway_electron_density_after63*1e-3);
 }
 TEST(Control, AdvanceRunawayPopulation_66)  {
-	EXPECT_NEAR(reference_runaway_electron_density_after66, advance_runaway_population(reference_ne, reference_runaway_electron_density_before,reference_te,reference_Zeff_1, reference_electric_field_1_runafluid, reference_magnetic_field, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules66, rate_values), reference_runaway_electron_density_after66*1e-3);
+	EXPECT_NEAR(reference_runaway_electron_density_after66, advance_runaway_population(CELL, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules66, rate_values), reference_runaway_electron_density_after66*1e-3);
 }
 TEST(Control, AdvanceRunawayPopulation_67)  {
-	EXPECT_NEAR(reference_runaway_electron_density_after67, advance_runaway_population(reference_ne, reference_runaway_electron_density_before,reference_te,reference_Zeff_1, reference_electric_field_1_runafluid, reference_magnetic_field, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules67, rate_values), reference_runaway_electron_density_after67*1e-3);
+	EXPECT_NEAR(reference_runaway_electron_density_after67, advance_runaway_population(CELL, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules67, rate_values), reference_runaway_electron_density_after67*1e-3);
 }
 
 TEST(list_parameter_setting, modulesOFF){
