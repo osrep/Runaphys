@@ -10,10 +10,9 @@
 using namespace std;
 
 double dreicer_generation_rate(double electron_density, double electron_temperature,
-		double effective_charge, double electric_field, double rho_tor_norm, module_struct modules) {
+		double effective_charge, double electric_field, module_struct const &modules) {
 		
 	double kB_T = electron_temperature* ITM_EV;
-	double coulomb_log = calculate_coulomb_log(electron_density, electron_temperature);
 	double thermal_electron_collision_time = calculate_thermal_electron_collision_time(electron_density, electron_temperature);
 	double Ed = calculate_dreicer_field(electron_density, electron_temperature);
 	double Ed__E = Ed/electric_field;

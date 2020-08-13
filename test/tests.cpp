@@ -62,6 +62,16 @@ const int avalanche_generation_rate_mod_1 = 0;
 const int avalanche_generation_rate_mod_2 = 0;
 const double avalanche_generation_rate_mod_3 = 2.991547;
 
+const double reference_runaway_electron_density_before = 3.12292e15;
+const double reference_timestep = 1.82e-3;
+const double reference_runaway_electron_density_after63 = 7.85e16;
+const double reference_runaway_electron_density_after66 = 1.66e19;
+const double reference_runaway_electron_density_after67 = 1.31e20;
+double rate_values[4] = {0,0,0,0};
+
+//std::string module_off_setting;
+module_struct modules_off; //= {module_off_setting, false, module_off_setting, false, false, module_off_setting}
+
 TEST(CoulombLog, CalculateCoulombLog) {
 	EXPECT_NEAR(reference_Coulomb_log, calculate_coulomb_log(reference_ne, reference_te), 0.0001);
 }
@@ -142,17 +152,17 @@ TEST(CriticalField, CalculateSynchrotronLossTime) {
 
 TEST(Dreicer, DreicerGenerationRate_63) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_63, dreicer_generation_rate(reference_ne, reference_te,reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules63), reference_dreicer_generation_rate_63*1e-4);
+																		  reference_electric_field_1_runafluid,modules63), reference_dreicer_generation_rate_63*1e-4);
 }
 
 TEST(Dreicer, DreicerGenerationRate_66) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_66, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules66), reference_dreicer_generation_rate_66*1e-4);
+																		  reference_electric_field_1_runafluid,modules66), reference_dreicer_generation_rate_66*1e-4);
 }
 
 TEST(Dreicer, DreicerGenerationRate_67) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_67, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,reference_rho_tor_norm,modules67), reference_dreicer_generation_rate_67*1e-4);
+																		  reference_electric_field_1_runafluid,modules67), reference_dreicer_generation_rate_67*1e-4);
 }
 
 TEST(Dreicer, CalculateLambda) {
@@ -188,4 +198,27 @@ TEST(Avalanche, CalculateAvalancheGenerationRate) {
 																		 reference_electric_field_1_runafluid,reference_magnetic_field,
 																		 modules_threshold), avalanche_generation_rate_mod_3*1e-5);
 
+}
+
+TEST(Control, AdvanceRunawayPopulation_63)  {
+	EXPECT_NEAR(reference_runaway_electron_density_after63, advance_runaway_population(reference_ne, reference_runaway_electron_density_before,reference_te,reference_Zeff_1, reference_electric_field_1_runafluid, reference_magnetic_field, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules63, rate_values), reference_runaway_electron_density_after63*1e-3);
+}
+TEST(Control, AdvanceRunawayPopulation_66)  {
+	EXPECT_NEAR(reference_runaway_electron_density_after66, advance_runaway_population(reference_ne, reference_runaway_electron_density_before,reference_te,reference_Zeff_1, reference_electric_field_1_runafluid, reference_magnetic_field, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules66, rate_values), reference_runaway_electron_density_after66*1e-3);
+}
+TEST(Control, AdvanceRunawayPopulation_67)  {
+	EXPECT_NEAR(reference_runaway_electron_density_after67, advance_runaway_population(reference_ne, reference_runaway_electron_density_before,reference_te,reference_Zeff_1, reference_electric_field_1_runafluid, reference_magnetic_field, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules67, rate_values), reference_runaway_electron_density_after67*1e-3);
+}
+
+TEST(list_parameter_setting, modulesOFF){
+	testing::internal::CaptureStderr();
+	list_parameter_settings(modules_off);
+	std::string output = testing::internal::GetCapturedStderr();
+	EXPECT_EQ("  [Runaway Fluid] \tDreicer module OFF\n  [Runaway Fluid] \tAvalanche OFF\n  [Runaway Fluid] \tToroidicity module OFF\n", output);
+}
+TEST(list_parameter_setting, modulesON){
+	testing::internal::CaptureStderr();
+	list_parameter_settings(modules63);
+	std::string output = testing::internal::GetCapturedStderr();
+	EXPECT_EQ("  [Runaway Fluid] \tDreicer module ON (hc_formula_63)\n  [Runaway Fluid] \tAvalanche module ON (rosenbluth_putvinski)\n  [Runaway Fluid] \tToroidicity module OFF\n", output);
 }
