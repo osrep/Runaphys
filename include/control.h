@@ -21,6 +21,6 @@ struct module_struct {
 double advance_runaway_population(double electron_density, double rundensity_before, double electron_temperature,
 		double effective_charge, double electric_field, double magnetic_field, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values);
 
-int list_parameter_settings(module_struct modules);
+int list_parameter_settings(module_struct const &modules);
 		
 #endif /* CONTROL_H_ */
