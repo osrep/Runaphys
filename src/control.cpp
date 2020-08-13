@@ -19,7 +19,7 @@ timestep: in s
 
 */
 
-double advance_runaway_population(cell cell, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
+double advance_runaway_population(const cell &cell, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
 	
 	double rundensity_after = 0.0;
 	double rate_dreicer = 0.0;

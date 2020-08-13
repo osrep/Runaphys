@@ -18,7 +18,7 @@ struct module_struct {
 	
 };
 
-double advance_runaway_population(cell cell, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values);
+double advance_runaway_population(const cell &cell, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values);
 
 int list_parameter_settings(module_struct const &modules);
 		
