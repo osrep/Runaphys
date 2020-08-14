@@ -19,7 +19,7 @@ script:
     # Wrap the compilation with the Sonar Build Wrapper
     - build-wrapper-linux-x86-64 --out-dir bw-output make
     # Run tests 
-    - ./build/test/RunaphysTests
+    - test/RunaphysTests
 
     #gcov
     - ./gcov.sh
