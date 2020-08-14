@@ -59,16 +59,6 @@ int write_data_to_hdf5(H5std_string FILE_NAME, H5std_string DATASETNAME, double 
 }
 
 
-int write_data_to_hdf5(H5std_string FILE_NAME, H5std_string DATASETNAME,  blitz::Array<double,1> dataext_blitz){
-
-	int cols =  dataext_blitz.rows();
-	double dataext[cols];
-	for (int i=0;i<cols;i++){
-		dataext[i] = dataext_blitz(i);
-	}
-	return write_data_to_hdf5(FILE_NAME, DATASETNAME, dataext, cols);
-
-}
 
 int write_data_to_hdf5(H5std_string FILE_NAME, H5std_string DATASETNAME, double* dataext, int cols){
 	try{
