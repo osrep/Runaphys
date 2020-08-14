@@ -23,7 +23,7 @@ endif()
 message($)
 
 # Include tests in build only when specified
-if(BUILD_TESTING EQUAL yes OR DEFINED GOOGLE_TEST_SOURCE)
+if(BUILD_TESTING OR DEFINED GOOGLE_TEST_SOURCE)
 	message("-- Building tests")
 	add_subdirectory(test)
 endif()
