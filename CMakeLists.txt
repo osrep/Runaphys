@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 11)
 # TODO check flags to use
 set(CMAKE_CXX_FLAGS "-Wall -ggdb -O3 -fPIC -march=native -mno-avx -fprofile-arcs -ftest-coverage ")
 
+add_definitions(-DBUILD_TESTING -DGOOGLE_TEST_SOURCE)
+
 include_directories("include")
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
@@ -18,8 +20,10 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
 endif()
 
+message($)
+
 # Include tests in build only when specified
-if(BUILD_TESTING OR DEFINED GOOGLE_TEST_SOURCE)
+if(BUILD_TESTING EQUAL yes OR DEFINED GOOGLE_TEST_SOURCE)
 	message("-- Building tests")
 	add_subdirectory(test)
 endif()
