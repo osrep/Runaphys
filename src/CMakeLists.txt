@@ -9,10 +9,14 @@ set(SOURCE_FILES
 find_package(HDF5)
 
 if(HDF5_FOUND)
+	message("-- HDF5 FOUND")
 	set(SOURCE_FILES 
 			${SOURCE_FILES}
 			hdf5export.cpp)
+else()
+	message("-- HDF5 NOT FOUND")
 endif()
+
 message(${SOURCE_FILES})
 
 add_library(Runaphys ${SOURCE_FILES})
