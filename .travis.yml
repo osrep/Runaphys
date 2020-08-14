@@ -15,14 +15,12 @@ script:
     - mkdir build && cd build
     - cmake .. -DBUILD_TESTING=yes
     # Go back to the project root folder in order for Sonar to find its config file
-    #- cd ..
-    # Wrap the compilation with the Sonar Build Wrapper
-    - build-wrapper-linux-x86-64 --out-dir bw-output make
-    # Run tests 
-    - test/RunaphysTests
-
-    #gcov
     - cd ..
+    # Wrap the compilation with the Sonar Build Wrapper
+    - build-wrapper-linux-x86-64 --out-dir bw-output cmake --build build/
+    # Run tests 
+    - build/test/RunaphysTests
+    #gcov
     - ./gcov.sh
     # Run Sonar analysis
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output 
