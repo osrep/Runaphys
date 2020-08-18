@@ -19,6 +19,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 # Include tests in build only when specified
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
-    add_subdirectory(test)
+if(BUILD_TESTING OR DEFINED GOOGLE_TEST_SOURCE)
+	message("-- Building tests")
+	add_subdirectory(test)
 endif()

@@ -1,6 +1,5 @@
 #include <cmath>
 #include <stdlib.h>
-#include "constants.h"
 #include "critical_field.h"
 #include "products.h"
 #include "cell.h"
@@ -51,4 +50,15 @@ double calculate_thermal_electron_collision_time(double electron_density, double
 	double therm_speed = sqrt(2*electron_temperature*ITM_EV/ITM_ME);
 
 	return pi_4_e02_me2__e4 * pow(therm_speed,3.0) / (electron_density * coulomb_log);	
+}
+
+double calculate_runaway_collision_time(double electron_density, double electron_temperature){
+
+	double coulomb_log = calculate_coulomb_log(electron_density, electron_temperature);
+			
+	return pi_4_e02_me2_c3__e4 / (electron_density * coulomb_log);	
+}
+
+double calculate_synchrotron_loss_time(double magnetic_field){
+	return pi_6_e0_me3_c3__e4/magnetic_field/magnetic_field;
 }

@@ -13,4 +13,8 @@ double calculate_dreicer_field(double electron_density, double electron_temperat
 
 double calculate_thermal_electron_collision_time(double electron_density, double electron_temperature);
 
+double calculate_runaway_collision_time(double electron_density, double electron_temperature);
+
+double calculate_synchrotron_loss_time(double magnetic_field);
+
 #endif /* CRITICAL_FIELD_H_ */
