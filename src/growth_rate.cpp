@@ -25,7 +25,14 @@ int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 }
 
 double calculate_growth_rate(double electron_density, double electron_temperature,
-							 double effective_charge, double electric_field) {
+				double effective_charge, double electric_field) {
+
+	if(electron_density < electron_density_lower_boundary)
+		throw "Electron density value out of boundaries";
+	if(electron_temperature < electron_temperature_lower_boundary)
+		throw "Electron temperature out of boundaries";
+	if(effective_charge < effective_charge_lower_boundary)
+		throw "Effective charge higher than 1";
 	
 	double growth_rate;
 

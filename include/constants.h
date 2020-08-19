@@ -57,6 +57,24 @@
     const double ITM_INVALID_INT = -999999999;
     const double ITM_INVALID_FLOAT = -9.0e40;
 
+    //parameter boundaries
+    const double electron_density_lower_boundary = 0;
+
+    const double electron_temperature_lower_boundary = 0;
+
+    const double runaway_density_lower_boundary = 0;
+
+    const double runaway_electron_lower_boundary = 0;
+
+    const double effective_charge_lower_boundary = 1;
+
+    const double magnetic_field_lower_boundary = 0;
+
+    const double inv_asp_ratio_higher_boundary = 1;
+    const double inv_asp_ratio_lower_boundary = 0;
+
+    const double rho_tor_norm_higher_boundary = 1;
+    const double rho_tor_norm_lower_boundary = 0;	
 	
 #endif
 	// rate identifiers
