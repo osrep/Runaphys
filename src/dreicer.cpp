@@ -6,18 +6,16 @@
 #include "dreicer.h"
 #include "products.h"
 #include "critical_field.h"
+#include "checks.h"
 
 using namespace std;
 
 double dreicer_generation_rate(double electron_density, double electron_temperature,
 		double effective_charge, double electric_field, module_struct const &modules) {
 		
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
-	if(effective_charge < effective_charge_lower_boundary)
-		throw "Effective charge higher than 1";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	effective_charge_valid(effective_charge);
 
 	double kB_T = electron_temperature* ITM_EV;
 	double thermal_electron_collision_time = calculate_thermal_electron_collision_time(electron_density, electron_temperature);
@@ -52,10 +50,8 @@ double dreicer_generation_rate(double electron_density, double electron_temperat
 
 double calculate_alpha(double electric_field, double electron_density, double electron_temperature){
 
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
 
 	return electric_field / calculate_critical_field(electron_density, electron_temperature);
 }
@@ -66,15 +62,13 @@ double calculate_lambda(double alpha){
 
 double calculate_gamma(double effective_charge, double alpha){
 
-	if(effective_charge < effective_charge_lower_boundary)
-		throw "Effective charge higher than 1";
+	effective_charge_valid(effective_charge);
 
 	return sqrt((1.0+effective_charge) * alpha*alpha/8.0/(alpha-1.0)) * (ITM_PI/2.0-asin(1.0-2.0/alpha));
 }
 double calculate_h(double alpha, double effective_charge){
 
-	if(effective_charge < effective_charge_lower_boundary)
-		throw "Effective charge higher than 1";
+	effective_charge_valid(effective_charge);
 
 	return (1.0/(16.0*(alpha-1.0)) * (alpha*(effective_charge+1.0) -
 			effective_charge + 7.0 + 2.0*sqrt(alpha/(alpha-1.0)) * (1.0+effective_charge)*(alpha-2.0)));
@@ -82,10 +76,8 @@ double calculate_h(double alpha, double effective_charge){
 
 double calculate_toroidicity_dreicer(double inv_asp_ratio, double rho_tor_norm){
 
-	if(inv_asp_ratio > inv_asp_ratio_higher_boundary || inv_asp_ratio < inv_asp_ratio_lower_boundary)
-		throw "Invalid inv_asp_ratio";
-	if(rho_tor_norm > rho_tor_norm_higher_boundary || rho_tor_norm < rho_tor_norm_lower_boundary)
-		throw "Invalid rho_to_norm";
+	rho_tor_norm_valid(rho_tor_norm);
+	inv_asp_ratio_valid(inv_asp_ratio);
 
     double inv_asp_ratio_coord = inv_asp_ratio*rho_tor_norm;
 	return (1.0 - 1.2*sqrt((2.0*inv_asp_ratio_coord)/(1.0+inv_asp_ratio_coord)));

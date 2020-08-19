@@ -74,7 +74,9 @@
     const double inv_asp_ratio_lower_boundary = 0;
 
     const double rho_tor_norm_higher_boundary = 1;
-    const double rho_tor_norm_lower_boundary = 0;	
+    const double rho_tor_norm_lower_boundary = 0;
+
+    const double timestep_lower_boundary = 0;	
 	
 #endif
 	// rate identifiers

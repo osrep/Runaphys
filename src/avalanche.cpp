@@ -6,20 +6,17 @@
 #include "avalanche.h"
 #include "products.h"
 #include "critical_field.h"
+#include "checks.h"
 
 using namespace std;
 
 double avalanche_generation_rate(double electron_density, double electron_temperature, double effective_charge, double electric_field, double magnetic_field, module_struct const &modules) {
 
 	//parameter check
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
-	if(effective_charge < effective_charge_lower_boundary)
-		throw "Effective charge higher than 1";
-	if(magnetic_field < magnetic_field_lower_boundary)
-		throw "Magnetic field out of boundaries";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	effective_charge_valid(effective_charge);
+	magnetic_field_valid(magnetic_field);
 
 	double avalanche_generation_rate = 0;
 	double avalanche_threshold_field;
@@ -50,15 +47,10 @@ double avalanche_generation_rate(double electron_density, double electron_temper
 double calculate_avalanche_threshold_field(double electron_density, double electron_temperature, double effective_charge, double critical_field, double magnetic_field){
 
 	//parameter check
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
-	if(effective_charge < effective_charge_lower_boundary)
-		throw "Effective charge higher than 1";
-	if(magnetic_field < magnetic_field_lower_boundary)
-		throw "Magnetic field out of boundaries";
-
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	effective_charge_valid(effective_charge);
+	magnetic_field_valid(magnetic_field);
 
 	// electron collision time
 
@@ -73,14 +65,10 @@ double calculate_avalanche_threshold_field(double electron_density, double elect
 double calculate_toroidicity_avalanche(double inv_asp_ratio, double electric_field, double electron_density, double electron_temperature, double rho_tor_norm){
 	
 	//parameter check
-	if(electron_density < electron_density_lower_boundary )
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
-	if(inv_asp_ratio > inv_asp_ratio_higher_boundary || inv_asp_ratio < inv_asp_ratio_lower_boundary)
-		throw "Invalid inv_asp_ratio";
-	if(rho_tor_norm > rho_tor_norm_higher_boundary || rho_tor_norm_lower_boundary < rho_tor_norm_lower_boundary)
-		throw "Invalid rho_to_norm";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	rho_tor_norm_valid(rho_tor_norm);
+	inv_asp_ratio_valid(inv_asp_ratio);
 
     double inv_asp_ratio_coord = inv_asp_ratio*rho_tor_norm;
     

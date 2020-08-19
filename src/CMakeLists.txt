@@ -4,6 +4,7 @@ set(SOURCE_FILES
 	avalanche.cpp
 	control.cpp
 	dreicer.cpp
+	checks.cpp
 )
 
 find_package(HDF5)

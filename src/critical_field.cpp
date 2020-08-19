@@ -3,6 +3,7 @@
 #include "critical_field.h"
 #include "products.h"
 #include "cell.h"
+#include "checks.h"
 
 /** 
  * Checks if a electric field is larger then the critical field 
@@ -24,10 +25,8 @@ int is_field_critical(profile pro, double rho_max) {
 
 double calculate_critical_field(double electron_density, double electron_temperature) {
 
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
 	
 	// Coulomb logarithm
 	double coulomb_log = calculate_coulomb_log(electron_density, electron_temperature);
@@ -38,10 +37,8 @@ double calculate_critical_field(double electron_density, double electron_tempera
 
 double calculate_coulomb_log(double electron_density, double electron_temperature) {
 
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
 
 	// Coulomb logarithm	
 	return 14.9 - 0.5 * log(electron_density * 1e-20) + log(electron_temperature * 1e-3);
@@ -49,10 +46,8 @@ double calculate_coulomb_log(double electron_density, double electron_temperatur
 
 double calculate_dreicer_field(double electron_density, double electron_temperature){
 
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
 
 	// Dreicer field
 	return  calculate_critical_field(electron_density, electron_temperature) * me_c2 / electron_temperature / ITM_EV ;
@@ -60,10 +55,8 @@ double calculate_dreicer_field(double electron_density, double electron_temperat
 
 double calculate_thermal_electron_collision_time(double electron_density, double electron_temperature){
 
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
 
 	double coulomb_log = calculate_coulomb_log(electron_density, electron_temperature);
 			
@@ -74,10 +67,8 @@ double calculate_thermal_electron_collision_time(double electron_density, double
 
 double calculate_runaway_collision_time(double electron_density, double electron_temperature){
 
-	if(electron_density < electron_density_lower_boundary)
-		throw "Electron density value out of boundaries";
-	if(electron_temperature < electron_temperature_lower_boundary)
-		throw "Electron temperature out of boundaries";
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
 
 	double coulomb_log = calculate_coulomb_log(electron_density, electron_temperature);
 			
@@ -85,7 +76,7 @@ double calculate_runaway_collision_time(double electron_density, double electron
 }
 
 double calculate_synchrotron_loss_time(double magnetic_field){
-	if(magnetic_field < magnetic_field_lower_boundary)
-		throw "Magnetic field out of boundaries";
+
+	magnetic_field_valid(magnetic_field);
 	return pi_6_e0_me3_c3__e4/magnetic_field/magnetic_field;
 }
