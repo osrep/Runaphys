@@ -2,6 +2,18 @@
 #define CHECKS_H
 
 #include "constants.h"
+#include <string>
+#include <exception>
+
+class runaphysException : public std::exception {
+	std::string exception_message;
+public:
+	runaphysException(const std::string message) : exception_message(message){}
+	const char* what() const noexcept override{
+		return exception_message.c_str();
+	}
+};
+
 
 void electron_density_valid(double electron_density);
 
