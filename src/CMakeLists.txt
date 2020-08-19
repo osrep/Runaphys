@@ -17,6 +17,5 @@ else()
 	message("-- HDF5 NOT FOUND")
 endif()
 
-message(${SOURCE_FILES})
 
 add_library(Runaphys ${SOURCE_FILES})

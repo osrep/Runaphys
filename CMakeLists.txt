@@ -20,7 +20,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
 endif()
 
-message($)
 
 # Include tests in build only when specified
 if(BUILD_TESTING OR DEFINED GOOGLE_TEST_SOURCE)
