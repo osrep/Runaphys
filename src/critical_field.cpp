@@ -85,5 +85,7 @@ double calculate_runaway_collision_time(double electron_density, double electron
 }
 
 double calculate_synchrotron_loss_time(double magnetic_field){
+	if(magnetic_field < magnetic_field_lower_boundary)
+		throw "Magnetic field out of boundaries";
 	return pi_6_e0_me3_c3__e4/magnetic_field/magnetic_field;
 }

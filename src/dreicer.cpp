@@ -84,7 +84,7 @@ double calculate_toroidicity_dreicer(double inv_asp_ratio, double rho_tor_norm){
 
 	if(inv_asp_ratio > inv_asp_ratio_higher_boundary || inv_asp_ratio < inv_asp_ratio_lower_boundary)
 		throw "Invalid inv_asp_ratio";
-	if(rho_tor_norm > rho_tor_norm_higher_boundary || rho_tor_norm_lower_boundary < rho_tor_norm_lower_boundary)
+	if(rho_tor_norm > rho_tor_norm_higher_boundary || rho_tor_norm < rho_tor_norm_lower_boundary)
 		throw "Invalid rho_to_norm";
 
     double inv_asp_ratio_coord = inv_asp_ratio*rho_tor_norm;

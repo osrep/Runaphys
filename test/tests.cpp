@@ -71,29 +71,79 @@ double rate_values[4] = {0,0,0,0};
 
 cell CELL = {reference_rho_tor_norm, reference_ne, reference_te, reference_Zeff_1,reference_electric_field_1_runafluid, reference_magnetic_field, reference_runaway_electron_density_before};
 
+const double invalid_electron_density_value = -1;
+const double invalid_electron_temp = -1;
+const double invalid_eff_charge = -1;
+const double invalid_magnetic_field = -1;
+const double invalid_inv_asp_ratio = -1;
+const double invalid_rho_tor_norm = -1;
+
 module_struct modules_off; 
+
 TEST(CoulombLog, CalculateCoulombLog) {
 	EXPECT_NEAR(reference_Coulomb_log, calculate_coulomb_log(reference_ne, reference_te), 0.0001);
+}
+TEST(CoulombLog, ExpectErrorThrowDensity) {
+	EXPECT_THROW(calculate_coulomb_log(invalid_electron_density_value, reference_te), const char*);
+}
+TEST(CoulombLog, ExpectErrorThrowTemp) {
+	EXPECT_THROW(calculate_coulomb_log(reference_ne, invalid_electron_temp), const char*);
 }
 
 TEST(CriticalField, CalculateCriticalField) {
 	EXPECT_NEAR(reference_electric_field, calculate_critical_field(reference_ne, reference_te), 0.0001);
 }
+TEST(CriticalField, ExpectErrorThrowDensity) {
+	EXPECT_THROW(calculate_critical_field(invalid_electron_density_value, reference_te),const char*);
+}
+TEST(CriticalField, ExpectErrorThrowTemperature) {
+	EXPECT_THROW(calculate_critical_field(reference_ne, invalid_electron_temp),const char*);
+}
 
 TEST(GrowthRate, CalculateDreicerField) {
 	EXPECT_NEAR(reference_dreicer_field, calculate_dreicer_field(reference_ne, reference_te), 0.01);
 }
+TEST(GrowthRate, ExpectErrorThrowDensityDreicer) {
+	EXPECT_THROW(calculate_dreicer_field(invalid_electron_density_value, reference_te), const char*);
+}
+TEST(GrowthRate, ExpectErrorThrowTempDreicer) {
+	EXPECT_THROW(calculate_dreicer_field(reference_ne, invalid_electron_temp), const char*);
+}
 
 TEST(GrowthRate, CalculateThermalElectronCollisionTime) {
-	EXPECT_NEAR(reference_thermal_electron_collision_time, calculate_thermal_electron_collision_time(reference_ne,reference_te), 0.0001);
+	EXPECT_NEAR(reference_thermal_electron_collision_time,calculate_thermal_electron_collision_time(reference_ne,reference_te), 0.0001);
+}
+TEST(GrowthRate, ExpectErrorThrowDensityThermalElectronCollisionTime) {
+	EXPECT_THROW( calculate_thermal_electron_collision_time(invalid_electron_density_value,reference_te), const char*);
+}
+TEST(GrowthRate, ExpectErrorThrowTempThermalElectronCollisionTime) {
+	EXPECT_THROW(calculate_thermal_electron_collision_time(reference_ne,invalid_electron_temp), const char*);
 }
 
 TEST(GrowthRate, CalculateGrowthRate_1) {
 	EXPECT_NEAR(reference_growth_rate_1, calculate_growth_rate(reference_ne, reference_te, reference_Zeff_1, reference_electric_field_1), 1e18);
 }
+TEST(GrowthRate, ExpectErrorThrowDensity) {
+	EXPECT_THROW(calculate_growth_rate(invalid_electron_density_value, reference_te, reference_Zeff_1, reference_electric_field_1), const char*);
+}
+TEST(GrowthRate, ExpectErrorThrowTemp) {
+	EXPECT_THROW(calculate_growth_rate(reference_ne, invalid_electron_temp, reference_Zeff_1, reference_electric_field_1), const char*);
+}
+TEST(GrowthRate, ExpectErrorThrowEff) {
+	EXPECT_THROW(calculate_growth_rate(reference_ne, reference_te, invalid_eff_charge, reference_electric_field_1), const char*);
+}
 
 TEST(GrowthRate, CalculateGrowthRate_2) {
 	EXPECT_NEAR(reference_growth_rate_2, calculate_growth_rate(reference_ne, reference_te, reference_Zeff_2, reference_electric_field_2), 1e18);
+}
+TEST(GrowthRate, ExpectErrorThrowDensity2) {
+	EXPECT_THROW(calculate_growth_rate(invalid_electron_density_value, reference_te, reference_Zeff_1, reference_electric_field_2), const char*);
+}
+TEST(GrowthRate, ExpectErrorThrowTemp2) {
+	EXPECT_THROW(calculate_growth_rate(reference_ne, invalid_electron_temp, reference_Zeff_1, reference_electric_field_2), const char*);
+}
+TEST(GrowthRate, ExpectErrorThrowEff2) {
+	EXPECT_THROW(calculate_growth_rate(reference_ne, reference_te, invalid_eff_charge, reference_electric_field_2), const char*);
 }
 
 TEST(CriticalField, IsFieldCritical) {
@@ -145,15 +195,37 @@ TEST(GrowthRate, IsGrowthRateOverLimit) {
 TEST(CriticalField, CalculateRunawayCollisionTime) {
 	EXPECT_NEAR(reference_runaway_electron_collision_time, calculate_runaway_collision_time(reference_ne, reference_te), reference_runaway_electron_collision_time*1e-4);
 }
+TEST(CriticalField, ExpectThrowDensityRunawayCollisionTime) {
+	EXPECT_THROW(calculate_runaway_collision_time(invalid_electron_density_value, reference_te), const char*);
+}
+TEST(CriticalField, ExpectThrowTempRunawayCollisionTime) {
+	EXPECT_THROW(calculate_runaway_collision_time(reference_ne, invalid_electron_temp), const char*);
+}
 
 TEST(CriticalField, CalculateSynchrotronLossTime) {
 	EXPECT_NEAR(reference_synchrotron_loss_time, calculate_synchrotron_loss_time(reference_magnetic_field), reference_synchrotron_loss_time*1e-5);
+}
+TEST(CriticalField, ExpectThrowMagneticField){
+	EXPECT_THROW(calculate_synchrotron_loss_time(invalid_magnetic_field), const char*);
 }
 
 TEST(Dreicer, DreicerGenerationRate_63) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_63, dreicer_generation_rate(reference_ne, reference_te,reference_Zeff_1,
 																		  reference_electric_field_1_runafluid,modules63), reference_dreicer_generation_rate_63*1e-4);
 }
+TEST(Dreicer, ExpectThrowDensity){
+	EXPECT_THROW(dreicer_generation_rate(invalid_electron_density_value, reference_te,reference_Zeff_1,
+			  reference_electric_field_1_runafluid,modules63), const char*);
+}
+TEST(Dreicer, ExpectThrowTemp){
+	EXPECT_THROW(dreicer_generation_rate(reference_ne, invalid_electron_temp,reference_Zeff_1,
+			  reference_electric_field_1_runafluid,modules63), const char*);
+}
+TEST(Dreicer, ExpectThrowEffCharge){
+	EXPECT_THROW(dreicer_generation_rate(reference_ne, reference_te,invalid_eff_charge,
+			  reference_electric_field_1_runafluid,modules63),const char*);
+}
+
 
 TEST(Dreicer, DreicerGenerationRate_66) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_66, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
@@ -172,19 +244,43 @@ TEST(Dreicer, CalculateLambda) {
 TEST(Dreicer, CalculateGamma) {
 	EXPECT_NEAR(reference_gamma,calculate_gamma(reference_Zeff_1, reference_alpha_1),reference_gamma*1e-9);
 }
+TEST(Dreicer, ExpectErrorThrowEffChargeGamma){
+	EXPECT_THROW(calculate_gamma(invalid_eff_charge, reference_alpha_1), const char*);
+}
 
 TEST(Dreicer, CalculateH) {
 	EXPECT_NEAR(reference_h,calculate_h(reference_alpha_1, reference_Zeff_1), reference_h*1e-8);
+}
+TEST(Dreicer, ExpectErrorThrowEffChargeH){
+	EXPECT_THROW(calculate_h(reference_alpha_1, invalid_eff_charge),const char*);
 }
 
 TEST(Dreicer, CalculateToroidicityDreicer) {
 	EXPECT_NEAR(reference_toroidicity_dreicer,calculate_toroidicity_dreicer(reference_inv_asp_ratio,reference_rho_tor_norm),reference_toroidicity_dreicer*1e-6);
 }
+TEST(Dreicer, ExpectErrorThrowInvAspRatio){
+	EXPECT_THROW(calculate_toroidicity_dreicer(invalid_inv_asp_ratio,reference_rho_tor_norm), const char*);
+}
+TEST(Dreicer, ExpectErrorThrowRhoTorNorm){
+	EXPECT_THROW(calculate_toroidicity_dreicer(reference_inv_asp_ratio,invalid_rho_tor_norm), const char*);
+}
+
 
 TEST(Avalanche, CalculateAvalancheThresholdField){								//new test with good inputs and outputs
 	EXPECT_NEAR(reference_avalanche_threshold_field, calculate_avalanche_threshold_field(reference_ne, reference_te, reference_Zeff_1, reference_critical_field, reference_magnetic_field),reference_avalanche_threshold_field*1e-5);
 }
-
+TEST(Avalanche, ExpectErrorElDensity){
+	EXPECT_THROW(calculate_avalanche_threshold_field(invalid_eff_charge, reference_te, reference_Zeff_1, reference_critical_field, reference_magnetic_field),const char*);
+}
+TEST(Avalanche, ExpectErrorTemp){
+	EXPECT_THROW(calculate_avalanche_threshold_field(reference_ne, invalid_electron_temp, reference_Zeff_1, reference_critical_field, reference_magnetic_field),const char*);
+}
+TEST(Avalanche, ExpectErrorEffCharge){
+	EXPECT_THROW(calculate_avalanche_threshold_field(reference_ne, reference_te, invalid_eff_charge, reference_critical_field, reference_magnetic_field),const char*);
+}
+TEST(Avalanche, ExpectErrorMagneticField){
+	EXPECT_THROW(calculate_avalanche_threshold_field(reference_ne, reference_te, reference_Zeff_1, reference_critical_field, invalid_magnetic_field),const char*);
+}
 
 TEST(Avalanche, CalculateAvalancheGenerationRate) {
 
@@ -198,6 +294,26 @@ TEST(Avalanche, CalculateAvalancheGenerationRate) {
 																		 reference_electric_field_1_runafluid,reference_magnetic_field,
 																		 modules_threshold), avalanche_generation_rate_mod_3*1e-5);
 
+}
+TEST(Avalanche, ExpectErrorElDensityGenRate){
+	EXPECT_THROW( avalanche_generation_rate(invalid_electron_density_value, reference_te, reference_Zeff_1,
+											reference_electric_field_2_runafluid,reference_magnetic_field,
+																					modules_no_threshold),const char*);
+}
+TEST(Avalanche, ExpectErrorTempGenRate){
+	EXPECT_THROW( avalanche_generation_rate(reference_ne, invalid_electron_temp, reference_Zeff_1,
+											reference_electric_field_2_runafluid,reference_magnetic_field,
+																					modules_no_threshold),const char*);
+}
+TEST(Avalanche, ExpectErrorEffChargeGenRate){
+	EXPECT_THROW( avalanche_generation_rate(reference_ne, reference_te, invalid_eff_charge,
+											reference_electric_field_2_runafluid,reference_magnetic_field,
+																					modules_no_threshold),const char*);
+}
+TEST(Avalanche, ExpectErrorMagneticFieldGenRate){
+	EXPECT_THROW( avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
+											reference_electric_field_2_runafluid,invalid_magnetic_field,
+																					modules_no_threshold),const char*);
 }
 
 TEST(Control, AdvanceRunawayPopulation_63)  {
