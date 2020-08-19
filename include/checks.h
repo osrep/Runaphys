@@ -8,7 +8,7 @@
 class runaphysException : public std::exception {
 	std::string exception_message;
 public:
-	runaphysException(const std::string message) : exception_message(message){}
+	explicit runaphysException(const std::string &message) : exception_message(message){}
 	const char* what() const noexcept override{
 		return exception_message.c_str();
 	}
