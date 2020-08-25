@@ -14,6 +14,6 @@ struct plasma_local {
 	double runaway_density; 
 };
 
-typedef std::vector<cell> plasma_profile;
+typedef std::vector<plasma_local> plasma_profile;
 
 #endif	/* CELL_H_ */

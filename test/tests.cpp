@@ -70,7 +70,7 @@ const double reference_runaway_electron_density_after66 = 1.66e19;
 const double reference_runaway_electron_density_after67 = 1.31e20;
 double rate_values[4] = {0,0,0,0};
 
-cell CELL = {reference_rho_tor_norm, reference_ne, reference_te, reference_Zeff_1,reference_electric_field_3, reference_magnetic_field, reference_runaway_electron_density_before};
+plasma_local Plasma_Local = {reference_rho_tor_norm, reference_ne, reference_te, reference_Zeff_1,reference_electric_field_3, reference_magnetic_field, reference_runaway_electron_density_before};
 const double invalid_electron_density_value = -1;
 const double invalid_electron_temp = -1;
 const double invalid_eff_charge = -1;
@@ -147,46 +147,48 @@ TEST(GrowthRate, ExpectErrorThrowEff2) {
 }
 
 TEST(CriticalField, IsFieldCritical) {
-	cell cell1, cell2;
+	plasma_local plasma_local1;
+	plasma_local plasma_local2;
 
 	//increasing critical field
-	cell1.electron_density = 1.1*reference_ne;
-	cell1.electron_temperature = reference_te;
-	cell1.electric_field = reference_electric_field;
+	plasma_local1.electron_density = 1.1*reference_ne;
+	plasma_local1.electron_temperature = reference_te;
+	plasma_local1.electric_field = reference_electric_field;
 
 	//decreasing critical field
-	cell2.electron_density = 0.9*reference_ne;
-	cell2.electron_temperature = reference_te;
-	cell2.electric_field = reference_electric_field;
+	plasma_local2.electron_density = 0.9*reference_ne;
+	plasma_local2.electron_temperature = reference_te;
+	plasma_local2.electric_field = reference_electric_field;
 
-	profile pro;
-	pro.push_back(cell1);
+	plasma_profile pro;
+	pro.push_back(plasma_local1);
 	EXPECT_NEAR(0, is_field_critical(pro, reference_rho_max), 0.1);
 	EXPECT_NEAR(reference_electric_field, calculate_critical_field(reference_ne,reference_te), 0.1);
 
-	pro.push_back(cell2);
+	pro.push_back(plasma_local2);
 	EXPECT_NEAR(1, is_field_critical(pro, reference_rho_max), 0.1);
 
 }
 
 TEST(GrowthRate, IsGrowthRateOverLimit) {
-	cell cell1, cell2;
+	plasma_local plasma_local1;
+	plasma_local plasma_local2;
 
-	cell1.electron_density = 0.9*reference_ne;
-	cell1.electron_temperature = reference_te;
-	cell1.effective_charge = reference_Zeff_1;
-	cell1.electric_field = reference_electric_field_1;
+	plasma_local1.electron_density = 0.9*reference_ne;
+	plasma_local1.electron_temperature = reference_te;
+	plasma_local1.effective_charge = reference_Zeff_1;
+	plasma_local1.electric_field = reference_electric_field_1;
 
-	cell2.electron_density = 1.1*reference_ne;
-	cell2.electron_temperature = reference_te;
-	cell2.effective_charge = reference_Zeff_2;
-	cell2.electric_field = reference_electric_field_2;
+	plasma_local2.electron_density = 1.1*reference_ne;
+	plasma_local2.electron_temperature = reference_te;
+	plasma_local2.effective_charge = reference_Zeff_2;
+	plasma_local2.electric_field = reference_electric_field_2;
 
-	profile pro;
-	pro.push_back(cell1);
+	plasma_profile pro;
+	pro.push_back(plasma_local1);
 	EXPECT_EQ(1, is_growth_rate_over_limit(pro, reference_growth_rate_1, reference_rho_max));
 
-	pro.push_back(cell2);
+	pro.push_back(plasma_local2);
 	EXPECT_EQ(0, is_growth_rate_over_limit(pro, reference_growth_rate_2, reference_rho_max));
 }
 
@@ -317,13 +319,13 @@ TEST(Avalanche, ExpectErrorMagneticFieldGenRate){
 }
 
 TEST(Control, AdvanceRunawayPopulation_63)  {
-	EXPECT_NEAR(reference_runaway_electron_density_after63, advance_runaway_population(CELL, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules63, rate_values), reference_runaway_electron_density_after63*1e-3);
+	EXPECT_NEAR(reference_runaway_electron_density_after63, advance_runaway_population(Plasma_Local, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules63, rate_values), reference_runaway_electron_density_after63*1e-3);
 }
 TEST(Control, AdvanceRunawayPopulation_66)  {
-	EXPECT_NEAR(reference_runaway_electron_density_after66, advance_runaway_population(CELL, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules66, rate_values), reference_runaway_electron_density_after66*1e-3);
+	EXPECT_NEAR(reference_runaway_electron_density_after66, advance_runaway_population(Plasma_Local, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules66, rate_values), reference_runaway_electron_density_after66*1e-3);
 }
 TEST(Control, AdvanceRunawayPopulation_67)  {
-	EXPECT_NEAR(reference_runaway_electron_density_after67, advance_runaway_population(CELL, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules67, rate_values), reference_runaway_electron_density_after67*1e-3);
+	EXPECT_NEAR(reference_runaway_electron_density_after67, advance_runaway_population(Plasma_Local, reference_timestep,reference_inv_asp_ratio, reference_rho_tor_norm, modules67, rate_values), reference_runaway_electron_density_after67*1e-3);
 }
 
 TEST(list_parameter_setting, modulesOFF){

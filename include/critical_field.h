@@ -1,9 +1,9 @@
 #ifndef CRITICAL_FIELD_H_
 #define CRITICAL_FIELD_H_
 
-#include "cell.h"
+#include "plasma_structures.h"
 
-int is_field_critical(profile pro, double rho_max);
+int is_field_critical(plasma_profile pro, double rho_max);
 
 double calculate_coulomb_log(double electron_density, double electron_temperature);
 

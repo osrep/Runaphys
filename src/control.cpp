@@ -4,7 +4,7 @@
 #include "critical_field.h"
 #include "dreicer.h"
 #include "avalanche.h"
-#include "cell.h"
+#include "plasma_structures.h"
 #ifdef ITM_CONSTANTS
     #include "cpo_utils.h"
 #elif IMAS_CONSTANTS
@@ -19,7 +19,7 @@ timestep: in s
 
 */
 
-double advance_runaway_population(const cell &cell, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
+double advance_runaway_population(const plasma_local &plasma_local, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
 	
 	double rundensity_after = 0.0;
 	double rate_dreicer = 0.0;
@@ -30,13 +30,13 @@ double advance_runaway_population(const cell &cell, double timestep, double inv_
 		if (modules.dreicer_formula.empty()){
 			rate_dreicer = 0;
 		}else{
-			rate_dreicer = dreicer_generation_rate(cell.electron_density, cell.electron_temperature, cell.effective_charge, cell.electric_field, modules);
+			rate_dreicer = dreicer_generation_rate(plasma_local.electron_density, plasma_local.electron_temperature, plasma_local.effective_charge, plasma_local.electric_field, modules);
 		}
 		
 		if (modules.avalanche_formula.empty()){
 			rate_avalanche = 0;
 		}else{		
-			rate_avalanche = avalanche_generation_rate(cell.electron_density, cell.electron_temperature, cell.effective_charge, cell.electric_field, cell.magnetic_field, modules);
+			rate_avalanche = avalanche_generation_rate(plasma_local.electron_density, plasma_local.electron_temperature, plasma_local.effective_charge, plasma_local.electric_field, plasma_local.magnetic_field, modules);
 		}
 			
 		if (modules.dreicer_toroidicity){
@@ -44,17 +44,17 @@ double advance_runaway_population(const cell &cell, double timestep, double inv_
 		}
 			
 		if (modules.avalanche_toroidicity){
-			rate_avalanche *= calculate_toroidicity_avalanche(inv_asp_ratio, cell.electric_field, cell.electron_density, cell.electron_temperature, rho_tor_norm);
+			rate_avalanche *= calculate_toroidicity_avalanche(inv_asp_ratio, plasma_local.electric_field, plasma_local.electron_density, plasma_local.electron_temperature, rho_tor_norm);
 		}
 		
-		rundensity_after = cell.runaway_density + (cell.electron_density*rate_dreicer + cell.runaway_density*rate_avalanche) * timestep;
+		rundensity_after = plasma_local.runaway_density + (plasma_local.electron_density*rate_dreicer + plasma_local.runaway_density*rate_avalanche) * timestep;
 		
-		critical_field = calculate_critical_field(cell.electron_density, cell.electron_temperature);
+		critical_field = calculate_critical_field(plasma_local.electron_density, plasma_local.electron_temperature);
 		
-		rate_values[RATEID_DREICER] = rate_dreicer * cell.electron_density;
+		rate_values[RATEID_DREICER] = rate_dreicer * plasma_local.electron_density;
 		rate_values[RATEID_AVALANCHE] = rate_avalanche;
 		rate_values[RATEID_CRITICAL_FIELD] = critical_field;
-		rate_values[RATEID_ELECTRIC_FIELD] = cell.electric_field/critical_field;
+		rate_values[RATEID_ELECTRIC_FIELD] = plasma_local.electric_field/critical_field;
 
 	} catch (const std::exception& ex) {
 		// internal error in runaway distribution calculation
