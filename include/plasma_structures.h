@@ -4,7 +4,7 @@
 // cell structure	
 #include <vector>
 
-struct cell {
+struct plasma_local {
 	double rho;
 	double electron_density;
 	double electron_temperature;
@@ -14,6 +14,6 @@ struct cell {
 	double runaway_density; 
 };
 
-typedef std::vector<cell> profile;
+typedef std::vector<cell> plasma_profile;
 
 #endif	/* CELL_H_ */
