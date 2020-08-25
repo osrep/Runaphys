@@ -26,8 +26,8 @@ const double reference_critical_field = 0.935882;
 const double reference_runaway_electron_collision_time = 1.82129e-3;
 const double reference_alpha_1 = 1.2;
 const double reference_alpha_2 = 0.8;
-const double reference_electric_field_1_runafluid =  reference_alpha_1*reference_critical_field;
-const double reference_electric_field_2_runafluid =  reference_alpha_2*reference_critical_field;
+const double reference_electric_field_3 =  reference_alpha_1*reference_critical_field;
+const double reference_electric_field_4 =  reference_alpha_2*reference_critical_field;
 
 std::string str_dreicer_formula63 = "hc_formula_63";
 std::string str_dreicer_formula66 = "hc_formula_66";
@@ -70,7 +70,7 @@ const double reference_runaway_electron_density_after66 = 1.66e19;
 const double reference_runaway_electron_density_after67 = 1.31e20;
 double rate_values[4] = {0,0,0,0};
 
-cell CELL = {reference_rho_tor_norm, reference_ne, reference_te, reference_Zeff_1,reference_electric_field_1_runafluid, reference_magnetic_field, reference_runaway_electron_density_before};
+cell CELL = {reference_rho_tor_norm, reference_ne, reference_te, reference_Zeff_1,reference_electric_field_3, reference_magnetic_field, reference_runaway_electron_density_before};
 const double invalid_electron_density_value = -1;
 const double invalid_electron_temp = -1;
 const double invalid_eff_charge = -1;
@@ -211,30 +211,30 @@ TEST(CriticalField, ExpectThrowMagneticField){
 
 TEST(Dreicer, DreicerGenerationRate_63) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_63, dreicer_generation_rate(reference_ne, reference_te,reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,modules63), reference_dreicer_generation_rate_63*1e-4);
+																		  reference_electric_field_3,modules63), reference_dreicer_generation_rate_63*1e-4);
 }
 TEST(Dreicer, ExpectThrowDensity){
 	EXPECT_THROW(dreicer_generation_rate(invalid_electron_density_value, reference_te,reference_Zeff_1,
-			  reference_electric_field_1_runafluid,modules63), runaphysException);
+			  reference_electric_field_3,modules63), runaphysException);
 }
 TEST(Dreicer, ExpectThrowTemp){
 	EXPECT_THROW(dreicer_generation_rate(reference_ne, invalid_electron_temp,reference_Zeff_1,
-			  reference_electric_field_1_runafluid,modules63), runaphysException);
+			  reference_electric_field_3,modules63), runaphysException);
 }
 TEST(Dreicer, ExpectThrowEffCharge){
 	EXPECT_THROW(dreicer_generation_rate(reference_ne, reference_te,invalid_eff_charge,
-			  reference_electric_field_1_runafluid,modules63),runaphysException);
+			  reference_electric_field_3,modules63),runaphysException);
 }
 
 
 TEST(Dreicer, DreicerGenerationRate_66) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_66, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,modules66), reference_dreicer_generation_rate_66*1e-4);
+																		  reference_electric_field_3,modules66), reference_dreicer_generation_rate_66*1e-4);
 }
 
 TEST(Dreicer, DreicerGenerationRate_67) {
 	EXPECT_NEAR(reference_dreicer_generation_rate_67, dreicer_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		  reference_electric_field_1_runafluid,modules67), reference_dreicer_generation_rate_67*1e-4);
+																		  reference_electric_field_3,modules67), reference_dreicer_generation_rate_67*1e-4);
 }
 
 TEST(Dreicer, CalculateLambda) {
@@ -285,34 +285,34 @@ TEST(Avalanche, ExpectErrorMagneticField){
 TEST(Avalanche, CalculateAvalancheGenerationRate) {
 
 	EXPECT_NEAR(avalanche_generation_rate_mod_1, avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		 reference_electric_field_2_runafluid,reference_magnetic_field,
+																		 reference_electric_field_4,reference_magnetic_field,
 																		 modules_no_threshold), avalanche_generation_rate_mod_1*1e-6);
 	EXPECT_NEAR(avalanche_generation_rate_mod_2, avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		 reference_electric_field_2_runafluid,reference_magnetic_field,
+																		 reference_electric_field_4,reference_magnetic_field,
 																		 modules_no_threshold), avalanche_generation_rate_mod_2*1e-6);
 	EXPECT_NEAR(avalanche_generation_rate_mod_3, avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-																		 reference_electric_field_1_runafluid,reference_magnetic_field,
+																		 reference_electric_field_3,reference_magnetic_field,
 																		 modules_threshold), avalanche_generation_rate_mod_3*1e-5);
 
 }
 TEST(Avalanche, ExpectErrorElDensityGenRate){
 	EXPECT_THROW( avalanche_generation_rate(invalid_electron_density_value, reference_te, reference_Zeff_1,
-											reference_electric_field_2_runafluid,reference_magnetic_field,
+											reference_electric_field_4,reference_magnetic_field,
 																					modules_no_threshold),runaphysException);
 }
 TEST(Avalanche, ExpectErrorTempGenRate){
 	EXPECT_THROW( avalanche_generation_rate(reference_ne, invalid_electron_temp, reference_Zeff_1,
-											reference_electric_field_2_runafluid,reference_magnetic_field,
+											reference_electric_field_4,reference_magnetic_field,
 																					modules_no_threshold),runaphysException);
 }
 TEST(Avalanche, ExpectErrorEffChargeGenRate){
 	EXPECT_THROW( avalanche_generation_rate(reference_ne, reference_te, invalid_eff_charge,
-											reference_electric_field_2_runafluid,reference_magnetic_field,
+											reference_electric_field_4,reference_magnetic_field,
 																					modules_no_threshold),runaphysException);
 }
 TEST(Avalanche, ExpectErrorMagneticFieldGenRate){
 	EXPECT_THROW( avalanche_generation_rate(reference_ne, reference_te, reference_Zeff_1,
-											reference_electric_field_2_runafluid,invalid_magnetic_field,
+											reference_electric_field_4,invalid_magnetic_field,
 																					modules_no_threshold),runaphysException);
 }
 
@@ -330,11 +330,11 @@ TEST(list_parameter_setting, modulesOFF){
 	testing::internal::CaptureStderr();
 	list_parameter_settings(modules_off);
 	std::string output = testing::internal::GetCapturedStderr();
-	EXPECT_EQ("  [Runaway Fluid] \tDreicer module OFF\n  [Runaway Fluid] \tAvalanche OFF\n  [Runaway Fluid] \tToroidicity module OFF\n", output);
+	EXPECT_EQ("  [Runaway Physics] \tDreicer module OFF\n  [Runaway Physics] \tAvalanche OFF\n  [Runaway Physics] \tToroidicity module OFF\n", output);
 }
 TEST(list_parameter_setting, modulesON){
 	testing::internal::CaptureStderr();
 	list_parameter_settings(modules63);
 	std::string output = testing::internal::GetCapturedStderr();
-	EXPECT_EQ("  [Runaway Fluid] \tDreicer module ON (hc_formula_63)\n  [Runaway Fluid] \tAvalanche module ON (rosenbluth_putvinski)\n  [Runaway Fluid] \tToroidicity module OFF\n", output);
+	EXPECT_EQ("  [Runaway Physics] \tDreicer module ON (hc_formula_63)\n  [Runaway Physics] \tAvalanche module ON (rosenbluth_putvinski)\n  [Runaway Physics] \tToroidicity module OFF\n", output);
 }

@@ -13,12 +13,12 @@ int init_hdf5_file(H5std_string FILE_NAME, int cols, string* dataset_name_list, 
 		H5File file;
 		file.openFile(FILE_NAME, H5F_ACC_RDWR);
 		file.close();
-		cout << "  [Runaway Fluid] \tHDF5 output file: "  << FILE_NAME << endl;
+		cout << "  [Runaway Physics] \tHDF5 output file: "  << FILE_NAME << endl;
 
 		return 0;
 	}catch(FileIException error){
 		try{
-			cout << "  [Runaway Fluid] \tHDF5 output file does not exist: "  << FILE_NAME << endl;
+			cout << "  [Runaway Physics] \tHDF5 output file does not exist: "  << FILE_NAME << endl;
 			hsize_t size_empty[2] = {0,0};
 			hsize_t size_max[2] = {H5S_UNLIMITED, H5S_UNLIMITED};
 
@@ -37,18 +37,18 @@ int init_hdf5_file(H5std_string FILE_NAME, int cols, string* dataset_name_list, 
 			delete dataspace_out;
 			file_out.close();
 
-			cout << "  [Runaway Fluid] \tHDF5 output file created: "  << FILE_NAME << endl;
+			cout << "  [Runaway Physics] \tHDF5 output file created: "  << FILE_NAME << endl;
 
 			return 0;
 		}catch(...){	
 
-			cout << "  [Runaway Fluid] \tCould not create HDF5 output file: "  << FILE_NAME << endl;
+			cout << "  [Runaway Physics] \tCould not create HDF5 output file: "  << FILE_NAME << endl;
 			return -1;
 		}
 
 	}catch(...){	
 
-		cout << "  [Runaway Fluid] \tCould not initialise HDF5 output file: "  << FILE_NAME << endl;
+		cout << "  [Runaway Physics] \tCould not initialise HDF5 output file: "  << FILE_NAME << endl;
 		return -1;
 	}
 }
@@ -100,21 +100,21 @@ int write_data_to_hdf5(H5std_string FILE_NAME, H5std_string DATASETNAME, double*
 		file.close();
 
 	}catch(FileIException error){
-		cout << "  [Runaway Fluid] \tHDF5 error in H5File operations"<< endl;
+		cout << "  [Runaway Physics] \tHDF5 error in H5File operations"<< endl;
 		error.printError();
 		return -1;	
 
 	}catch(DataSetIException error)	{
-		cout << "  [Runaway Fluid] \tHDF5 error in DataSet operations"<< endl;
+		cout << "  [Runaway Physics] \tHDF5 error in DataSet operations"<< endl;
 		error.printError();
 		return -1;	
 
 	}catch(DataSpaceIException error) {
-		cout << "  [Runaway Fluid] \tHDF5 error in DataSpace operations"<< endl;
+		cout << "  [Runaway Physics] \tHDF5 error in DataSpace operations"<< endl;
 		error.printError();
 		return -1;
 	}catch(...) {
-		cout << "  [Runaway Fluid] \tHDF5 general error" << endl;
+		cout << "  [Runaway Physics] \tHDF5 general error" << endl;
 		return -1;
 	}
 

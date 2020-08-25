@@ -64,8 +64,6 @@
 
     const double runaway_density_lower_boundary = 0;
 
-    const double runaway_electron_lower_boundary = 0;
-
     const double effective_charge_lower_boundary = 1;
 
     const double magnetic_field_lower_boundary = 0;

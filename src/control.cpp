@@ -58,8 +58,8 @@ double advance_runaway_population(const cell &cell, double timestep, double inv_
 
 	} catch (const std::exception& ex) {
 		// internal error in runaway distribution calculation
-		std::cerr << "[Runaway Fluid] ERROR: An error occurred during runaway distribution calculation." << std::endl;
-		std::cerr << "[Runaway Fluid] ERROR : " << ex.what() << std::endl;
+		std::cerr << "[Runaway Physics] ERROR: An error occurred during runaway distribution calculation." << std::endl;
+		std::cerr << "[Runaway Physics] ERROR : " << ex.what() << std::endl;
 		rundensity_after = ITM_INVALID_FLOAT;
 		
 	}
@@ -71,29 +71,29 @@ int list_parameter_settings(module_struct const &modules){
 	
 	// Dreicer message
 	if (modules.dreicer_formula.empty()){
-		std::cerr << "  [Runaway Fluid] \tDreicer module OFF"<< std::endl;
+		std::cerr << "  [Runaway Physics] \tDreicer module OFF"<< std::endl;
 	}else{
-		std::cerr << "  [Runaway Fluid] \tDreicer module ON ("  << modules.dreicer_formula << ")"<< std::endl;
+		std::cerr << "  [Runaway Physics] \tDreicer module ON ("  << modules.dreicer_formula << ")"<< std::endl;
 	}
 		
 	// avalanche message
 	if (modules.avalanche_formula.empty()){
-		std::cerr << "  [Runaway Fluid] \tAvalanche OFF"<< std::endl;
+		std::cerr << "  [Runaway Physics] \tAvalanche OFF"<< std::endl;
 	}else{
-		std::cerr << "  [Runaway Fluid] \tAvalanche module ON (" << modules.avalanche_formula << ")" << std::endl;
+		std::cerr << "  [Runaway Physics] \tAvalanche module ON (" << modules.avalanche_formula << ")" << std::endl;
 	}
 	
 	// toroidicity message
 	if (!modules.dreicer_toroidicity && !modules.avalanche_toroidicity){
-		std::cerr << "  [Runaway Fluid] \tToroidicity module OFF"<< std::endl;
+		std::cerr << "  [Runaway Physics] \tToroidicity module OFF"<< std::endl;
 		
 	}else if (modules.dreicer_toroidicity && modules.avalanche_toroidicity){
-		std::cerr << "  [Runaway Fluid] \tToroidicity module ON"<< std::endl;
+		std::cerr << "  [Runaway Physics] \tToroidicity module ON"<< std::endl;
 		
 	}else if (modules.dreicer_toroidicity && !modules.avalanche_toroidicity){
-		std::cerr << "  [Runaway Fluid] \tToroidicity module ONLY for Dreicer"<< std::endl;
+		std::cerr << "  [Runaway Physics] \tToroidicity module ONLY for Dreicer"<< std::endl;
 		
 	}else if (!modules.dreicer_toroidicity && modules.avalanche_toroidicity){
-		std::cerr << "  [Runaway Fluid] \tToroidicity module ONLY for Avalanche"<< std::endl;
+		std::cerr << "  [Runaway Physics] \tToroidicity module ONLY for Avalanche"<< std::endl;
 	}
 }
