@@ -6,10 +6,17 @@
 #include "avalanche.h"
 #include "products.h"
 #include "critical_field.h"
+#include "checks.h"
 
 using namespace std;
 
 double avalanche_generation_rate(double electron_density, double electron_temperature, double effective_charge, double electric_field, double magnetic_field, module_struct const &modules) {
+
+	//parameter check
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	effective_charge_valid(effective_charge);
+	magnetic_field_valid(magnetic_field);
 
 	double avalanche_generation_rate = 0;
 	double avalanche_threshold_field;
@@ -39,6 +46,12 @@ double avalanche_generation_rate(double electron_density, double electron_temper
 
 double calculate_avalanche_threshold_field(double electron_density, double electron_temperature, double effective_charge, double critical_field, double magnetic_field){
 
+	//parameter check
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	effective_charge_valid(effective_charge);
+	magnetic_field_valid(magnetic_field);
+
 	// electron collision time
 
 	double runaway_collision_time = calculate_runaway_collision_time(electron_density, electron_temperature);
@@ -50,6 +63,12 @@ double calculate_avalanche_threshold_field(double electron_density, double elect
 }
 
 double calculate_toroidicity_avalanche(double inv_asp_ratio, double electric_field, double electron_density, double electron_temperature, double rho_tor_norm){
+	
+	//parameter check
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	rho_tor_norm_valid(rho_tor_norm);
+	inv_asp_ratio_valid(inv_asp_ratio);
 
     double inv_asp_ratio_coord = inv_asp_ratio*rho_tor_norm;
     
