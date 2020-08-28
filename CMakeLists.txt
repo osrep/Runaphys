@@ -18,10 +18,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(CTest)
 endif()
 
-message("flag: ${BUILD_TESTING}")
-
 # Include tests in build only when specified
-if(BUILD_TESTING)
+if(BUILD_TESTING OR DEFINED GOOGLE_TEST_SOURCE)
 	message("-- Building tests")
 	add_subdirectory(test)
 endif()
