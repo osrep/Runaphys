@@ -2,6 +2,7 @@
 #define HDF5EXPORT_H_
 
 #include <array>
+#include "control.h"
 
 using namespace H5;
 using namespace std;
