@@ -1,3 +1,4 @@
+ [![Build Status](https://travis-ci.com/osrep/Runaphys.svg?branch=master)](https://travis-ci.com/osrep/Runaphys)
 # About Runaphys
 Repository for the physics modules of the Runin and Runafluid actors.
 
