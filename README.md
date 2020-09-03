@@ -5,9 +5,8 @@ Repository for the physics modules of the Runin and Runafluid actors.
 # How to build
 Building Runaphys requires cmake version 3.1 or above. To build the library you have to run the following commands:
 
-`mkdir build && cd build #creates the folder where the build files are created.`
-
-`cmake .. && make`
+`mkdir build && cd build #creates the folder where the build files are created.
+cmake .. && make`
 
 This will create Runaphys.a in the build folder. 
 
