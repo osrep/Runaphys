@@ -1,4 +1,4 @@
- [![Build Status](https://travis-ci.com/osrep/Runaphys.svg?branch=master)](https://travis-ci.com/osrep/Runaphys)
+ [![Build Status](https://travis-ci.com/osrep/Runaphys.svg?branch=master)](https://travis-ci.com/osrep/Runaphys) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.lapots.breed.judge:judge-rule-engine&metric=alert_status)](https://sonarcloud.io/dashboard?id=osrep_Runaphys)
 # About Runaphys
 Repository for the physics modules of the Runin and Runafluid actors.
 
