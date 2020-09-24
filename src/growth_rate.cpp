@@ -4,18 +4,19 @@
 #include "constants.h"
 #include "growth_rate.h"
 #include "critical_field.h"
-#include "cell.h"
+#include "plasma_structures.h"
+#include "checks.h"
 
 /**
  * Checks if growth is over a specified limit, given by the limit parameter
- * It requires the physical parameters of the plasma, which is given in the profile
+ * It requires the physical parameters of the plasma, which is given in the plasma_profile
  * Above a certain rho given by rho_max, a false flag is returned
  * regardless of the outcome of the check.
  * Otherwise if it is over the limit it returns true (1) and false (0) if not
  */
-int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
+int is_growth_rate_over_limit(plasma_profile pro, double limit, double rho_max) {
 
-	for (std::vector<cell>::iterator it = pro.begin(); it != pro.end(); ++it) {
+	for (std::vector<plasma_local>::iterator it = pro.begin(); it != pro.end(); ++it) {
 		if ( (calculate_growth_rate(it->electron_density, it->electron_temperature,
 				it->effective_charge, std::abs(it->electric_field)) > std::abs(limit))
 				&& (it->rho < rho_max) )
@@ -25,7 +26,11 @@ int is_growth_rate_over_limit(profile pro, double limit, double rho_max) {
 }
 
 double calculate_growth_rate(double electron_density, double electron_temperature,
-							 double effective_charge, double electric_field) {
+				double effective_charge, double electric_field) {
+
+	electron_density_valid(electron_density);
+	electron_temperature_valid(electron_temperature);
+	effective_charge_valid(effective_charge);
 	
 	double growth_rate;
 

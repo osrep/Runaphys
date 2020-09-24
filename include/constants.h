@@ -1,3 +1,6 @@
+#ifndef CONSTANTS_H_
+#define CONSTANTS_H_
+
 #ifdef ITM_CONSTANTS
     #include <itm_constants.h>
     
@@ -52,5 +55,37 @@
 
     // ERROR CODE
     const double ITM_INVALID_INT = -999999999;
+    const double ITM_INVALID_FLOAT = -9.0e40;
 
+    
+	
 #endif
+    // rate identifiers
+    const int N_RATES = 4;
+    const int RATEID_DREICER = 0;
+    const int RATEID_AVALANCHE = 1;
+    const int RATEID_ELECTRIC_FIELD = 2;
+    const int RATEID_CRITICAL_FIELD = 3;
+
+    //parameter boundaries
+    const double electron_density_lower_boundary = 0;
+
+    const double electron_temperature_lower_boundary = 0;
+
+    const double runaway_density_lower_boundary = 0;
+
+    const double effective_charge_lower_boundary = 1;
+
+    const double magnetic_field_lower_boundary = 0;
+
+    const double inv_asp_ratio_higher_boundary = 1;
+    const double inv_asp_ratio_lower_boundary = 0;
+
+    const double rho_tor_norm_higher_boundary = 1;
+    const double rho_tor_norm_lower_boundary = 0;
+
+    const double timestep_lower_boundary = 0;	
+
+    // distsource_identifier for runaways (7)
+    const int DISTSOURCE_IDENTIFIER = 7;
+#endif 
