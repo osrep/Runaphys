@@ -3,6 +3,7 @@
 
 #include <array>
 #include "control.h"
+#include "H5Cpp.h"
 
 using namespace H5;
 using namespace std;
