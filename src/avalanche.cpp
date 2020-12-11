@@ -37,7 +37,7 @@ double avalanche_generation_rate(double electron_density, double electron_temper
 		if (electric_field < avalanche_threshold_field) avalanche_generation_rate = 0;
 
 		// Avalanche rate must be non-negative
-		if(isnan(avalanche_generation_rate) || (avalanche_generation_rate<0)) avalanche_generation_rate = 0;
+		if(std::isnan((double)avalanche_generation_rate) || (avalanche_generation_rate<0)) avalanche_generation_rate = 0;
 	}
 	
 	return avalanche_generation_rate;
