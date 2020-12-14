@@ -39,7 +39,7 @@ double dreicer_generation_rate(double electron_density, double electron_temperat
 	} else dgr = Cr/thermal_electron_collision_time * pow(Ed__E,h) * exp(-lambda/4.0*Ed__E - sqrt(2.0*Ed__E)*gamma);
 	
 	// Dreicer rate must be non-negative
-	if ( isnan(dgr) || (dgr<0) ) dgr = 0;
+	if ( std::isnan(dgr) || (dgr<0) ) dgr = 0;
 
 	// output: Dreicer generation rate	
 	return dgr;
