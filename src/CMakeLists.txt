@@ -19,4 +19,4 @@ else()
 endif()
 
 
-add_library(Runaphys ${SOURCE_FILES})
+add_library(Runaphys SHARED ${SOURCE_FILES})
