@@ -97,3 +97,9 @@ int list_parameter_settings(module_struct const &modules){
 		std::cerr << "  [Runaway Physics] \tToroidicity module ONLY for Avalanche"<< std::endl;
 	}
 }
+
+
+extern "C"
+{
+	double Runaphys_advance_runaway_population(const plasma_local &plasma_local, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){return advance_runaway_population(plasma_local, timestep, inv_asp_ratio, rho_tor_norm, modules, rate_values);}
+}
