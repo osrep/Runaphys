@@ -4,7 +4,11 @@
 // cell structure	
 #include <vector>
 
-struct plasma_local {
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct plasma_local {
 	double rho;
 	double electron_density;
 	double electron_temperature;
@@ -12,7 +16,12 @@ struct plasma_local {
 	double electric_field;
 	double magnetic_field;
 	double runaway_density; 
-};
+} plasma_local;
+
+
+#ifdef __cplusplus
+}
+#endif
 
 typedef std::vector<plasma_local> plasma_profile;
 

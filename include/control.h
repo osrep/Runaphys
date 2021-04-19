@@ -5,6 +5,9 @@
 #include <string>
 #include "plasma_structures.h"
 	
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 struct module_struct {
 	std::string dreicer_formula;
@@ -16,10 +19,6 @@ struct module_struct {
 	double rho_edge_calculation_limit;
 	
 };
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 double advance_runaway_population(const plasma_local &plasma_local, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values);
 	

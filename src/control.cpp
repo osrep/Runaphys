@@ -11,6 +11,11 @@
     #include "ids_utils.h"
 #endif
 #include "products.h"
+#ifdef _WIN32
+#   define API __declspec(dllexport)
+#else
+#   define API
+#endif
 
 /*
 Runafluid actor
@@ -18,6 +23,18 @@ Runafluid actor
 timestep: in s
 
 */
+
+struct module_struct_wrap
+{
+    const char* dreicer_formula;
+    bool dreicer_toroidicity;
+    const char* avalanche_formula;
+    bool avalanche_toroidicity;
+    bool hdf5_output;
+    double warning_percentage_limit;
+    double rho_edge_calculation_limit;
+    
+};
 
 double advance_runaway_population(const plasma_local &plasma_local, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
 	
@@ -99,7 +116,23 @@ int list_parameter_settings(module_struct const &modules){
 }
 
 
-extern "C"
+extern "C" API
+double Runaphys_advance_runaway_population(
+        const plasma_local &plasma_local,
+        double timestep,
+        double inv_asp_ratio,
+        double rho_tor_norm,
+        module_struct_wrap const &modules_wrap,
+        double *rate_values)
 {
-	double Runaphys_advance_runaway_population(const plasma_local &plasma_local, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){return advance_runaway_population(plasma_local, timestep, inv_asp_ratio, rho_tor_norm, modules, rate_values);}
+    // convert ctypes-compatible structure to required C++ structure.
+    module_struct modules;
+    modules.dreicer_formula = modules_wrap.dreicer_formula;
+    modules.dreicer_toroidicity = modules_wrap.dreicer_toroidicity;
+    modules.avalanche_formula = modules_wrap.avalanche_formula;
+    modules.avalanche_toroidicity = modules_wrap.avalanche_toroidicity;
+    modules.hdf5_output = modules_wrap.hdf5_output;
+    modules.warning_percentage_limit = modules_wrap.warning_percentage_limit;
+    modules.rho_edge_calculation_limit = modules_wrap.rho_edge_calculation_limit;
+    return advance_runaway_population(plasma_local, timestep, inv_asp_ratio, rho_tor_norm, modules, rate_values);
 }
