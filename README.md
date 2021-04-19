@@ -19,7 +19,7 @@ This will create Runaphys.a in the build folder and also run the test cases.
 
 # References
 
-Runaway Physics is the core physics library of the Runaway Indicator and Runaway Fluid actors. The Runaway Indicator's basic description, documentation and source code is stored in the Github project https://github.com/osrep/Rurin. The Runaway Fluids's basic description, documentation and source code is stored in the Github project https://github.com/osrep/Runafluid. 
+Runaway Physics is the core physics library of the Runaway Indicator and Runaway Fluid actors. The Runaway Indicator's basic description, documentation and source code is stored in the Github project https://github.com/osrep/Runin. The Runaway Fluids's basic description, documentation and source code is stored in the Github project https://github.com/osrep/Runafluid. 
 
 Analytical formula used to determine the critical electric field is based on the work of A. Stahl et al [1]. The method of calculating Dreicer runaway generation growth rate stems from the article of J. W. Connor et al [2]. The runaway avalanche growth rate is based on the form in the article by E. Nilsson [3].
 
