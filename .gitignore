@@ -36,3 +36,6 @@
 
 #ignore build folder
 build/
+
+#ignore __pycache__ folder
+__pycache__/
