@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-typedef struct plasma_local {
+struct plasma_local {
 	double rho;
 	double electron_density;
 	double electron_temperature;
@@ -16,7 +16,7 @@ typedef struct plasma_local {
 	double electric_field;
 	double magnetic_field;
 	double runaway_density; 
-} plasma_local;
+};
 
 
 #ifdef __cplusplus

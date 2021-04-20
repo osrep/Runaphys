@@ -24,18 +24,6 @@ timestep: in s
 
 */
 
-struct module_struct_wrap
-{
-    const char* dreicer_formula;
-    bool dreicer_toroidicity;
-    const char* avalanche_formula;
-    bool avalanche_toroidicity;
-    bool hdf5_output;
-    double warning_percentage_limit;
-    double rho_edge_calculation_limit;
-    
-};
-
 double advance_runaway_population(const plasma_local &plasma_local, double timestep, double inv_asp_ratio, double rho_tor_norm, module_struct const &modules, double *rate_values){
 	
 	double rundensity_after = 0.0;
@@ -136,3 +124,4 @@ double Runaphys_advance_runaway_population(
     modules.rho_edge_calculation_limit = modules_wrap.rho_edge_calculation_limit;
     return advance_runaway_population(plasma_local, timestep, inv_asp_ratio, rho_tor_norm, modules, rate_values);
 }
+

@@ -9,6 +9,18 @@
 extern "C" {
 #endif
 
+struct module_struct_wrap
+{
+	const char* dreicer_formula;
+	bool dreicer_toroidicity;
+	const char* avalanche_formula;
+	bool avalanche_toroidicity;
+	bool hdf5_output;
+	double warning_percentage_limit;
+	double rho_edge_calculation_limit;
+	
+};
+
 struct module_struct {
 	std::string dreicer_formula;
 	bool dreicer_toroidicity;
