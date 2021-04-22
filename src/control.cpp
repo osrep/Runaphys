@@ -105,7 +105,7 @@ int list_parameter_settings(module_struct const &modules){
 
 
 extern "C" API
-double Runaphys_advance_runaway_population(
+double runaphys_advance_runaway_population(
         const plasma_local &plasma_local,
         double timestep,
         double inv_asp_ratio,
