@@ -9,5 +9,5 @@ cd test
 cd .. 
 cmake .. -DBUILD_DLL=true && make
 cd ../test
-python3 python_test.py
+python3 -m unittest -v python_test.Python_wrapper_test
 
